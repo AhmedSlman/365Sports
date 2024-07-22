@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sportat/const/colors.dart';
 import 'package:sportat/const/dimensions.dart';
 import 'package:sportat/core/appStorage/app_storage.dart';
-import 'package:sportat/core/router/router.dart';
 import 'package:sportat/translations/locale_keys.g.dart';
 import 'package:sportat/view/profile/widgets/edit_container.dart';
-import 'package:sportat/view/settings/view.dart';
-import 'package:sportat/view/splash/view.dart';
 import 'package:sportat/widgets/back_button.dart';
 import 'package:sportat/widgets/custom_text_button.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -115,13 +111,14 @@ class CoverAndImage extends StatelessWidget {
           isPageSettings == true
               ? const Text("")
               : isSearch == true
-                  ?  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-                    child: Align(
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 15),
+                      child: Align(
                         alignment: getAlignment(context),
                         child: const CustomBackButton(),
                       ),
-                  )
+                    )
                   : Positioned(
                       left: 30,
                       top: circleRadius,

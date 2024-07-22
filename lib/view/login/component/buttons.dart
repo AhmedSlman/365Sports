@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sportat/const/dimensions.dart';
-import 'package:sportat/core/appStorage/app_storage.dart';
 import 'package:sportat/core/router/router.dart';
 import 'package:sportat/translations/locale_keys.g.dart';
 import 'package:sportat/view/ForgetPassword/view.dart';
 import 'package:sportat/view/login/controller.dart';
 import 'package:sportat/view/login/states.dart';
 import 'package:sportat/widgets/custom_button.dart';
-import 'package:sportat/widgets/custom_text.dart';
 import 'package:sportat/widgets/custom_text_button.dart';
 import 'package:sportat/widgets/loading_indicator.dart';
-import 'package:sportat/widgets/socail_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class LoginButtons extends StatelessWidget {
@@ -31,14 +28,13 @@ class LoginButtons extends StatelessWidget {
         ),
         BlocBuilder(
           bloc: controller,
-          builder: (context, state) =>
-          state is LoginLoading
+          builder: (context, state) => state is LoginLoading
               ? const LoadingIndicator()
               : CustomButton(
-            text: LocaleKeys.LogIn_log_in.tr(),
-            fontSize: 15,
-            onPress: controller.login,
-          ),
+                  text: LocaleKeys.LogIn_log_in.tr(),
+                  fontSize: 15,
+                  onPress: controller.login,
+                ),
         ),
         const SizedBox(
           height: 15,

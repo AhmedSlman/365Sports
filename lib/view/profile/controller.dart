@@ -4,36 +4,35 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sportat/const/default_error.dart';
 import 'package:sportat/core/appStorage/app_storage.dart';
 import 'package:sportat/core/dioHelper/dio_helper.dart';
-import 'package:sportat/core/models/country.dart';
 import 'package:sportat/core/models/personal_info.dart';
-import 'package:sportat/core/models/profile-by-id.dart';
 import 'package:sportat/core/models/profile_model.dart';
 import 'package:sportat/view/profile/states.dart';
 
 class ProfileController extends Cubit<ProfileStates> {
-  ProfileController({this.id,this.isSearch=false}) : super(ProfileInit());
+  ProfileController({this.id, this.isSearch = false}) : super(ProfileInit());
 
   static ProfileController of(context) => BlocProvider.of(context);
 
   ProfileModel? profileModel;
   PersonalInfoModel? personalInfoModel;
   final int? id;
-   final bool isSearch;
+  final bool isSearch;
 
-  List<Video> videos=[];
+  List<Video> videos = [];
   Future<void> getProfile() async {
     emit(ProfileLoading());
     try {
-      final response = await DioHelper.get(isSearch==false?'get-profile':'profile-by-id?id=$id');
-      final data=response?.data as Map<String,dynamic>;
+      final response = await DioHelper.get(
+          isSearch == false ? 'get-profile' : 'profile-by-id?id=$id');
+      final data = response?.data as Map<String, dynamic>;
       print(data);
       print(response);
       profileModel = ProfileModel.fromJson(data);
-      if(profileModel!.data!.videos.isNotEmpty) {
+      if (profileModel!.data!.videos.isNotEmpty) {
         videos.addAll(profileModel!.data!.videos);
       }
       print(videos);
-    } catch (e,s) {
+    } catch (e, s) {
       showDefaultError();
       print(e);
       print(s);
@@ -44,11 +43,9 @@ class ProfileController extends Cubit<ProfileStates> {
   Future<void> getData() async {
     emit(ProfileLoading());
     await getProfile();
-     isSearch==true?null:await getPersonalInfo();
+    isSearch == true ? null : await getPersonalInfo();
     emit(ProfileInit());
   }
-
-
 
   Future<void> getPersonalInfo() async {
     emit(ProfileLoading());
@@ -61,5 +58,4 @@ class ProfileController extends Cubit<ProfileStates> {
     }
     emit(ProfileInit());
   }
-
 }

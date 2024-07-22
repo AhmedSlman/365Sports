@@ -4,7 +4,6 @@ import 'package:sportat/const/colors.dart';
 import 'package:sportat/const/dimensions.dart';
 import 'package:sportat/core/validator/validation.dart';
 import 'package:sportat/translations/locale_keys.g.dart';
-import 'package:sportat/view/settings/components/submit_buttons.dart';
 import 'package:sportat/view/settings/controller.dart';
 import 'package:sportat/view/settings/states.dart';
 import 'package:sportat/widgets/custom_button.dart';
@@ -30,7 +29,7 @@ void showEditBioForm(BuildContext context) {
                       text: LocaleKeys.EditBio_edit_bio.tr(),
                       fontSize: 19,
                       fontWeight: FontWeight.bold,
-                     alignment: getAlignment(context),
+                      alignment: getAlignment(context),
                     ),
                     InputFormField(
                       hint: "Bio",

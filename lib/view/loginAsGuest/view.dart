@@ -5,7 +5,6 @@ import 'package:sportat/core/router/router.dart';
 import 'package:sportat/view/loginAsGuest/component/buttons.dart';
 import 'package:sportat/view/loginAsGuest/component/text_fields.dart';
 import 'package:sportat/view/loginAsGuest/controller.dart';
-import 'package:sportat/view/signup/component/terms_privacy.dart';
 import 'package:sportat/view/welcome/view.dart';
 import 'package:sportat/widgets/custom_app_bar.dart';
 

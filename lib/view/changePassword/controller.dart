@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sportat/const/default_error.dart';
 import 'package:sportat/core/dioHelper/dio_helper.dart';
 import 'package:sportat/core/router/router.dart';
 import 'package:sportat/view/changePassword/states.dart';
-import 'package:sportat/widgets/custom_text.dart';
 import 'package:sportat/widgets/snack_bar.dart';
 
 class ChangePasswordController extends Cubit<ChangePasswordStates> {
@@ -39,7 +39,9 @@ class ChangePasswordController extends Cubit<ChangePasswordStates> {
       showSnackBar(data['massage']);
     } catch (e) {
       showDefaultError();
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
     emit(ChangePasswordInit());
   }

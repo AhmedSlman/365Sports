@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sportat/const/colors.dart';
 import 'package:sportat/core/router/router.dart';
-import 'package:sportat/view/home/controller.dart';
 import 'package:sportat/view/videoDetails/component/comment.dart';
 import 'package:sportat/view/videoDetails/component/comment_result.dart';
 import 'package:sportat/view/videoDetails/component/vote_video.dart';

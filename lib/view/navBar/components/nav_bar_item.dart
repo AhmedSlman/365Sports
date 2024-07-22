@@ -6,7 +6,6 @@ import 'package:sportat/core/appStorage/app_storage.dart';
 import 'package:sportat/view/navBar/cubit.dart';
 import 'package:sportat/view/navBar/states.dart';
 import 'package:sportat/view/navBar/widgets/custom_icon_button.dart';
-import 'package:sportat/widgets/loading_indicator.dart';
 
 class NavBarItem extends StatelessWidget {
   const NavBarItem({Key? key}) : super(key: key);
@@ -21,24 +20,31 @@ class NavBarItem extends StatelessWidget {
         children: [
           CustomIconButton(
             icon: Icons.home,
-            color: controller.isCurrentIndex(0) ? primaryColor : const Color.fromRGBO(183, 201, 213, 1),
+            color: controller.isCurrentIndex(0)
+                ? primaryColor
+                : const Color.fromRGBO(183, 201, 213, 1),
             onPressed: () => controller.changeIndex(0),
           ),
           CustomIconButton(
             icon: Icons.search_rounded,
-            color: controller.isCurrentIndex(1) ? primaryColor : const Color.fromRGBO(183, 201, 213, 1),
+            color: controller.isCurrentIndex(1)
+                ? primaryColor
+                : const Color.fromRGBO(183, 201, 213, 1),
             onPressed: () => controller.changeIndex(1),
           ),
           CustomIconButton(
             icon: Icons.notifications,
-            color: controller.isCurrentIndex(2) ? primaryColor : const Color.fromRGBO(183, 201, 213, 1),
+            color: controller.isCurrentIndex(2)
+                ? primaryColor
+                : const Color.fromRGBO(183, 201, 213, 1),
             onPressed: () => controller.changeIndex(2),
           ),
           AppStorage.isGuestLogged
               ? CustomIconButton(
                   icon: Icons.logout,
-                  color:
-                      controller.isCurrentIndex(2) ? primaryColor : const Color.fromRGBO(183, 201, 213, 1),
+                  color: controller.isCurrentIndex(2)
+                      ? primaryColor
+                      : const Color.fromRGBO(183, 201, 213, 1),
                   onPressed: () async => await AppStorage.signOut(),
                 )
               : InkWell(
@@ -47,9 +53,12 @@ class NavBarItem extends StatelessWidget {
                     bloc: controller,
                     builder: (context, state) => state is NavBarLoading
                         ? const SizedBox()
-                        :  CircleAvatar(
-                            backgroundImage: NetworkImage(AppStorage.getUserImage ==null?
-                                'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg':getBaseUrl+AppStorage.getUserImage!)),
+                        : CircleAvatar(
+                            backgroundImage: NetworkImage(AppStorage
+                                        .getUserImage ==
+                                    null
+                                ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'
+                                : getBaseUrl + AppStorage.getUserImage!)),
                   ),
                 ),
         ],

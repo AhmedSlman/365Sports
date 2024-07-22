@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sportat/const/colors.dart';
 import 'package:sportat/const/dimensions.dart';
-import 'package:sportat/const/list_countries.dart';
 import 'package:sportat/core/router/router.dart';
 import 'package:sportat/core/validator/validation.dart';
 import 'package:sportat/translations/locale_keys.g.dart';
 import 'package:sportat/view/changePassword/view.dart';
 import 'package:sportat/view/settings/components/submit_buttons.dart';
 import 'package:sportat/view/settings/controller.dart';
-import 'package:sportat/widgets/code_field.dart';
 import 'package:sportat/widgets/custom_text.dart';
 import 'package:sportat/widgets/custom_text_button.dart';
 import 'package:sportat/widgets/input_form_field.dart';
@@ -56,41 +54,41 @@ class PersonalInformationTextFields extends StatelessWidget {
                 ))
               ],
             ),
-          // InputFormField(
-          //   controller: controller.country,
-          //   hint: controller.country.text,
-          //   onChanged: (v){
-          //     controller.country.text=v;
-          //   },
-          //   fillColor: lightGrey,
-          //   suffixIcon: IconButton(icon: const Icon(Icons.arrow_drop_down),onPressed: (){ showCountryPicker(
-          //     context: context,
-          //     countryListTheme: CountryListThemeData(
-          //       flagSize: 25,
-          //       backgroundColor: Colors.white,
-          //       textStyle: const TextStyle(fontSize: 16, color: Colors.blueGrey),
-          //       //Optional. Sets the border radius for the bottomsheet.
-          //       borderRadius: const BorderRadius.only(
-          //         topLeft: Radius.circular(20.0),
-          //         topRight: Radius.circular(20.0),
-          //       ),
-          //       //Optional. Styles the search field.
-          //       inputDecoration: InputDecoration(
-          //         labelText: 'Search',
-          //         hintText: 'Start typing to search',
-          //         prefixIcon: const Icon(Icons.search),
-          //         border: OutlineInputBorder(
-          //           borderSide: BorderSide(
-          //             color: const Color(0xFF8C98A8).withOpacity(0.2),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //     onSelect: (Country country) {
-          //       controller.country.text=country.name;
-          //     },
-          //   );},),
-          // ),
+            // InputFormField(
+            //   controller: controller.country,
+            //   hint: controller.country.text,
+            //   onChanged: (v){
+            //     controller.country.text=v;
+            //   },
+            //   fillColor: lightGrey,
+            //   suffixIcon: IconButton(icon: const Icon(Icons.arrow_drop_down),onPressed: (){ showCountryPicker(
+            //     context: context,
+            //     countryListTheme: CountryListThemeData(
+            //       flagSize: 25,
+            //       backgroundColor: Colors.white,
+            //       textStyle: const TextStyle(fontSize: 16, color: Colors.blueGrey),
+            //       //Optional. Sets the border radius for the bottomsheet.
+            //       borderRadius: const BorderRadius.only(
+            //         topLeft: Radius.circular(20.0),
+            //         topRight: Radius.circular(20.0),
+            //       ),
+            //       //Optional. Styles the search field.
+            //       inputDecoration: InputDecoration(
+            //         labelText: 'Search',
+            //         hintText: 'Start typing to search',
+            //         prefixIcon: const Icon(Icons.search),
+            //         border: OutlineInputBorder(
+            //           borderSide: BorderSide(
+            //             color: const Color(0xFF8C98A8).withOpacity(0.2),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     onSelect: (Country country) {
+            //       controller.country.text=country.name;
+            //     },
+            //   );},),
+            // ),
             //  CodeField(
             //   text: controller.personalInfoModel!.data!.user!.country!,
             //   fillColor: lightGrey,
@@ -123,9 +121,9 @@ class PersonalInformationTextFields extends StatelessWidget {
               color: Colors.black,
               onPressed: () {
                 showModalBottomSheet(
-                        context: MagicRouter.currentContext,
-                        isScrollControlled: true,
-                        builder: (context) => const ChangePasswordView());
+                    context: MagicRouter.currentContext,
+                    isScrollControlled: true,
+                    builder: (context) => const ChangePasswordView());
               },
             ),
             const SubmitButtons(),

@@ -1,5 +1,4 @@
 import 'package:sportat/core/models/home_model.dart';
-import 'package:sportat/core/models/profile_model.dart';
 
 abstract class HomeStates {}
 
@@ -17,5 +16,5 @@ class VideosLoading extends HomeStates {
   late final List<Datu> oldVideos;
   late final bool isFirstFetch;
 
-  VideosLoading(this.oldVideos, {this.isFirstFetch=false});
+  VideosLoading(this.oldVideos, {this.isFirstFetch = false});
 }

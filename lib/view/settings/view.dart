@@ -7,7 +7,6 @@ import 'package:sportat/view/settings/components/profile_image.dart';
 import 'package:sportat/view/settings/controller.dart';
 import 'package:sportat/view/settings/states.dart';
 import 'package:sportat/widgets/loading_indicator.dart';
-import 'package:sportat/widgets/profile_cover_and_image.dart';
 import 'package:sportat/widgets/profile_user_information.dart';
 import 'components/personal_information_text_fields.dart';
 
@@ -31,25 +30,17 @@ class SettingsView extends StatelessWidget {
                       children: [
                         const ProfileImage(),
                         UserInformation(
-                          isPageSettings: true,
-                          name: '${SettingsController.of(context)
-                              .personalInfoModel!
-                              .data!
-                              .user!
-                              .firstName!} ${SettingsController.of(context)
-                              .personalInfoModel!
-                              .data!
-                              .user!
-                              .lastName!}' ,
-                          description: SettingsController.of(context)
-                              .personalInfoModel
-                              ?.data!
-                              .user!
-                              .bio,
-                          onTap: (){
-                            showEditBioForm(context);
-                          }
-                        ),
+                            isPageSettings: true,
+                            name:
+                                '${SettingsController.of(context).personalInfoModel!.data!.user!.firstName!} ${SettingsController.of(context).personalInfoModel!.data!.user!.lastName!}',
+                            description: SettingsController.of(context)
+                                .personalInfoModel
+                                ?.data!
+                                .user!
+                                .bio,
+                            onTap: () {
+                              showEditBioForm(context);
+                            }),
                         const PersonalInformationTextFields(),
                       ],
                     ),
