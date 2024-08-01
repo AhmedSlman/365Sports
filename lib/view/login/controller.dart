@@ -47,12 +47,14 @@ class LoginController extends Cubit<LoginStates> {
         await AppStorage.cacheRegisterOneInfo(userModel);
         AppStorage.isLogged
             ? MagicRouter.navigateAndPopAll(const NavBarView())
-            : MagicRouter.navigateTo(PinCodeView(
-                email: null,
-                phone: phone.text,
-                isForget: false,
-                isGuest: false,
-              ));
+            : MagicRouter.navigateAndPopAll(NavBarView());
+
+        // MagicRouter.navigateTo(PinCodeView(
+        //     email: null,
+        //     phone: phone.text,
+        //     isForget: false,
+        //     isGuest: false,
+        //   ));
         showSnackBar(data['massage']);
       } else {
         showSnackBar(data['massage']);

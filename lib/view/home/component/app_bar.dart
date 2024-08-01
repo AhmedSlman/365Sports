@@ -87,8 +87,8 @@ class HomeAppBar extends StatelessWidget {
                 child: SelectItemWidget(
                   onTap: () {},
                   text: isEn(context)
-                      ? categories![index]["name_en"]
-                      : categories![index]["name_ar"],
+                      ? categories![index]["name_en"] ?? ""
+                      : categories![index]["name_ar"] ?? "",
                 ),
               ),
             ),

@@ -1,1 +1,1 @@
-String get getBaseUrl => "https://365sportat.com/";
+String get getBaseUrl => "https://365sportat.app/";

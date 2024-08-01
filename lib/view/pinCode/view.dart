@@ -54,8 +54,8 @@ class PinCodeView extends StatelessWidget {
               ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: const [
+                child: const Column(
+                  children: [
                     PinCodeAppBar(),
                     SizedBox(
                       height: 22,

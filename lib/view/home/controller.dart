@@ -62,7 +62,7 @@ class HomeController extends Cubit<HomeStates> {
   Future<void> init() async {
     emit(HomeLoading());
     await getHomeData();
-    await getLive();
+    // await getLive();
     await pagination(page);
     emit(HomeInit());
   }

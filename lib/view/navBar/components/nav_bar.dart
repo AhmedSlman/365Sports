@@ -18,13 +18,15 @@ class NavBar extends StatelessWidget {
         backgroundColor: Colors.white,
         body: controller.getCurrentView,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton:AppStorage.isGuestLogged?const Text(""): FloatingActionButton(
-          child: const FloatingActionChild(),
-          onPressed: () {
-            addVideoForm(context);
-          },
-        ),
-        bottomNavigationBar:    BottomAppBar(
+        floatingActionButton: AppStorage.isGuestLogged
+            ? const Text("")
+            : FloatingActionButton(
+                child: const FloatingActionChild(),
+                onPressed: () {
+                  addVideoForm(context);
+                },
+              ),
+        bottomNavigationBar: const BottomAppBar(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: NavBarItem(),
