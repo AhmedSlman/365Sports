@@ -13,6 +13,7 @@ class NavBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = NavBarCubit.of(context);
+
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: Row(
@@ -20,24 +21,24 @@ class NavBarItem extends StatelessWidget {
         children: [
           CustomIconButton(
             icon: Icons.home,
+            onPressed: () => controller.changeIndex(0),
             color: controller.isCurrentIndex(0)
                 ? primaryColor
                 : const Color.fromRGBO(183, 201, 213, 1),
-            onPressed: () => controller.changeIndex(0),
           ),
           CustomIconButton(
             icon: Icons.search_rounded,
+            onPressed: () => controller.changeIndex(1),
             color: controller.isCurrentIndex(1)
                 ? primaryColor
                 : const Color.fromRGBO(183, 201, 213, 1),
-            onPressed: () => controller.changeIndex(1),
           ),
           CustomIconButton(
             icon: Icons.notifications,
+            onPressed: () => controller.changeIndex(2),
             color: controller.isCurrentIndex(2)
                 ? primaryColor
                 : const Color.fromRGBO(183, 201, 213, 1),
-            onPressed: () => controller.changeIndex(2),
           ),
           AppStorage.isGuestLogged
               ? CustomIconButton(

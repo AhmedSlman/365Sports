@@ -27,12 +27,12 @@ class NavBar extends StatelessWidget {
                 },
               ),
         bottomNavigationBar: const BottomAppBar(
+          notchMargin: 8.0,
+          shape: CircularNotchedRectangle(),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: NavBarItem(),
           ),
-          notchMargin: 8.0,
-          shape: CircularNotchedRectangle(),
         ),
       ),
     );

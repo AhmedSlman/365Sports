@@ -4,13 +4,15 @@ import 'package:sportat/view/navBar/components/nav_bar.dart';
 import 'package:sportat/view/navBar/cubit.dart';
 
 class NavBarView extends StatelessWidget {
- const NavBarView({Key? key,}) : super(key: key);
+  const NavBarView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => NavBarCubit()..getHomeData(),
-      child:  NavBar(),
+      child: const NavBar(),
     );
   }
 }

@@ -14,7 +14,10 @@ class CustomIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(icon,color: color,),
+      icon: Icon(
+        icon,
+        color: color,
+      ),
       onPressed: onPressed,
     );
   }

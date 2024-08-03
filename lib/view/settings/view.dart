@@ -32,12 +32,13 @@ class SettingsView extends StatelessWidget {
                         UserInformation(
                             isPageSettings: true,
                             name:
-                                '${SettingsController.of(context).personalInfoModel!.data!.user!.firstName!} ${SettingsController.of(context).personalInfoModel!.data!.user!.lastName!}',
+                                '${SettingsController.of(context).personalInfoModel!.data!.user!.firstName ?? ''} ${SettingsController.of(context).personalInfoModel!.data!.user!.lastName ?? ''}',
                             description: SettingsController.of(context)
-                                .personalInfoModel
-                                ?.data!
-                                .user!
-                                .bio,
+                                    .personalInfoModel
+                                    ?.data!
+                                    .user!
+                                    .bio ??
+                                "",
                             onTap: () {
                               showEditBioForm(context);
                             }),

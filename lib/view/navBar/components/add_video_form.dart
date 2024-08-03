@@ -16,11 +16,12 @@ void addVideoForm(BuildContext context) {
         child: Padding(
             padding: MediaQuery.of(context).viewInsets,
             child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 child: Form(
                   child: Wrap(
                     runSpacing: 20,
-                    children:  <Widget>[
+                    children: <Widget>[
                       CustomText(
                         text: LocaleKeys.UploadVideo_add_video.tr(),
                         fontSize: 19,
@@ -29,12 +30,15 @@ void addVideoForm(BuildContext context) {
                       ),
                       const UploadVideo(),
                       const UploadVideoFields(),
-                      CustomText(text: LocaleKeys.UploadVideo_choose_spoort.tr(),fontSize: 16,),
+                      CustomText(
+                        text: LocaleKeys.UploadVideo_choose_spoort.tr(),
+                        fontSize: 16,
+                      ),
                       const ChooseSport(),
                       CustomButton(
-                        text: LocaleKeys.UploadVideo_upload.tr(),fontSize: 17,
+                        text: LocaleKeys.UploadVideo_upload.tr(),
+                        fontSize: 17,
                       )
-
                     ],
                   ),
                 ))),

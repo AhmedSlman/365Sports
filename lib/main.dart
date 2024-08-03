@@ -5,6 +5,7 @@ import 'package:sportat/core/router/router.dart';
 import 'package:sportat/firebase_options.dart';
 import 'package:sportat/translations/codegen_loader.g.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:sportat/view/splash/view.dart';
 import 'package:sportat/view/welcome/view.dart';
 
 void main() async {
@@ -40,7 +41,7 @@ class Sport extends StatelessWidget {
       ),
       navigatorKey: navigatorKey,
       onGenerateRoute: onGenerateRoute,
-      home: const WelcomeView(),
+      home: const SplashView(),
     );
   }
 }
