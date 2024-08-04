@@ -85,10 +85,13 @@ class HomeAppBar extends StatelessWidget {
               itemBuilder: (context, index) => Container(
                 margin: const EdgeInsets.symmetric(horizontal: 6),
                 child: SelectItemWidget(
-                  onTap: () {},
+                  onTap: () {
+                    final selectedCategory = categories![index]["name"];
+                    controller.setCategory(selectedCategory);
+                  },
                   text: isEn(context)
-                      ? categories![index]["name_en"] ?? ""
-                      : categories![index]["name_ar"] ?? "",
+                      ? categories![index]["name"] ?? ""
+                      : categories![index]["name"] ?? "",
                 ),
               ),
             ),

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sportat/const/base_url.dart';
@@ -137,16 +136,15 @@ class _VoteVideoState extends State<VoteVideo> {
                               final videoData = videoPage?.data;
                               final videos = videoData?.videos;
 
-                              if (videos != null) {
+                              if (videos != null && videos.isNotEmpty) {
                                 Share.share(getBaseUrl + videos);
                               } else {
-                                if (kDebugMode) {
-                                  print('No video data available.');
-                                }
+                                print(
+                                    '*********No video data available.****************');
                               }
                             },
                           ),
-                        )
+                        ),
                       ],
                     ),
                     TextWidget(

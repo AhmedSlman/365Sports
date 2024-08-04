@@ -14,6 +14,8 @@ class HomeController extends Cubit<HomeStates> {
   HomeController() : super(HomeInit());
 
   static HomeController of(context) => BlocProvider.of(context);
+  String? selectedCategory;
+
   String? competitionRules = '';
   List<Datu> homeVideos = [];
   HomeModel? homeModel;
@@ -101,5 +103,11 @@ class HomeController extends Cubit<HomeStates> {
       }
       emit(VideosLoaded(videos));
     });
+  }
+
+  void setCategory(String? category) {
+    selectedCategory = category;
+    page = 1; // Reset page number for new category
+    loadVideos(); // Reload videos based on selected category
   }
 }
