@@ -5,8 +5,6 @@ import 'package:sportat/core/router/router.dart';
 import 'package:sportat/translations/locale_keys.g.dart';
 import 'package:sportat/view/chooseLanguage/view.dart';
 import 'package:sportat/view/navBar/view.dart';
-import 'package:sportat/widgets/custom_button.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
@@ -20,7 +18,21 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
 
-    navigateToLogin();
+    _initializeApp();
+  }
+
+  Future<void> _initializeApp() async {
+    await AppStorage.init();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      final token = AppStorage.getToken;
+
+      if (token != null) {
+        MagicRouter.navigateAndPopAll(const NavBarView());
+      } else {
+        MagicRouter.navigateAndPopAll(const ChooseLanguageView());
+      }
+    });
   }
 
   @override
@@ -42,10 +54,9 @@ class _SplashViewState extends State<SplashView> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 height: sizeFromHeight(0.95),
-                // ignore: prefer_const_constructors
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
+                  children: [
                     // CustomButton(
                     //   text: LocaleKeys.Splash_start.tr(),
                     //   fontSize: 14,
@@ -62,13 +73,5 @@ class _SplashViewState extends State<SplashView> {
         ),
       ),
     );
-  }
-
-  void navigateToLogin() {
-    Future.delayed(const Duration(seconds: 4), () {
-      AppStorage.isLogged
-          ? MagicRouter.navigateAndPopAll(const ChooseLanguageView())
-          : MagicRouter.navigateAndPopAll(const NavBarView());
-    });
   }
 }

@@ -17,7 +17,8 @@ abstract class AppStorage {
     return profileModel;
   }
 
-  static bool get isLogged => registerOneInfo != null&&getRegisterOneData!.firstName !=''  ;
+  static bool get isLogged =>
+      registerOneInfo != null && getRegisterOneData!.firstName != '';
 
   ///for register one
 
@@ -33,18 +34,17 @@ abstract class AppStorage {
   static Future<void> cacheGuestToken(token) => _box.write('guestToken', token);
   static Future<void> cacheUserImage(image) => _box.write('image', image);
 
-
   static bool get isGuestLogged => _box.read('guestToken') != null;
 
   static String? get getGuestToken => _box.read('guestToken');
   static String? get getUserImage => _box.read('image');
 
-
   static Future<void> signOut() async {
     await _box.erase();
     MagicRouter.navigateAndPopAll(const SplashView());
   }
-  static Future<void>? launchURL( url) async {
+
+  static Future<void>? launchURL(url) async {
     if (!await launch(url)) throw 'Could not launch $url';
   }
 }

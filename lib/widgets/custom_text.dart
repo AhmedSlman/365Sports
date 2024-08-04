@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
-  const CustomText({
-    Key? key,
-    this.text='',
-    this.fontSize=20,
-    this.color=Colors.black,
-     this.alignment,
-    this.fontWeight,
-    this.verticalMargin = 0,
-    this.textAlign, this.decoration, this.fontFamily
-  }) : super(key: key);
+  const CustomText(
+      {Key? key,
+      this.text = '',
+      this.fontSize = 20,
+      this.color = Colors.black,
+      this.alignment,
+      this.fontWeight,
+      this.verticalMargin = 0,
+      this.textAlign,
+      this.decoration,
+      this.fontFamily})
+      : super(key: key);
 
   final String? text;
   final double fontSize;
@@ -22,15 +24,13 @@ class CustomText extends StatelessWidget {
   final TextAlign? textAlign;
   final TextDecoration? decoration;
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: verticalMargin),
       alignment: alignment,
       child: Text(
-
-        text!,
+        text ?? '',
         style: TextStyle(
           decoration: decoration,
           fontSize: fontSize,
@@ -38,7 +38,6 @@ class CustomText extends StatelessWidget {
           fontWeight: fontWeight,
         ),
         textAlign: textAlign,
-
       ),
     );
   }

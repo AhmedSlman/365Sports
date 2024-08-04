@@ -45,8 +45,10 @@ void showEditBioForm(BuildContext context) {
                           ? const LoadingIndicator()
                           : CustomButton(
                               text: LocaleKeys.Settings_save_changes.tr(),
-                              onPress: controller.updateProfile,
-                            ),
+                              onPress: () {
+                                controller.updateProfile;
+                                Navigator.pop(context);
+                              }),
                     ),
                   ],
                 ),

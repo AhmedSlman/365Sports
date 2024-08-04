@@ -12,7 +12,6 @@ import 'package:sportat/core/models/user_model.dart';
 import 'package:sportat/core/router/router.dart';
 import 'package:sportat/view/login/states.dart';
 import 'package:sportat/view/navBar/view.dart';
-import 'package:sportat/view/pinCode/view.dart';
 import 'package:sportat/widgets/snack_bar.dart';
 
 class LoginController extends Cubit<LoginStates> {

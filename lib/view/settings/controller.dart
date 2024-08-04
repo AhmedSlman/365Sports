@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,7 +23,7 @@ class SettingsController extends Cubit<SettingsStates> {
       lastName = TextEditingController(text: info.user?.lastName);
       email = TextEditingController(text: info.user?.email);
       phone = TextEditingController(text: info.user?.phone);
-       dateOfBirth = TextEditingController(text: info.user?.dOB);
+      dateOfBirth = TextEditingController(text: info.user?.dOB);
       bio = TextEditingController(text: info.user?.bio);
     }
     emit(SettingsInit());
@@ -32,9 +33,8 @@ class SettingsController extends Cubit<SettingsStates> {
   late final PersonalInfoModel? personalInfoModel;
   late UserModel registerOneModel;
   CountryModel? countryModel;
-  List<String>? countries=[];
-  TextEditingController country=TextEditingController();
-
+  List<String>? countries = [];
+  TextEditingController country = TextEditingController();
 
   TextEditingController firstName = TextEditingController();
 
@@ -77,28 +77,34 @@ class SettingsController extends Cubit<SettingsStates> {
       'd_o_b': dateOfBirth.text,
       'bio': bio.text,
     };
-    FormData formData=FormData.fromMap(body);
-    if(image !=null){
-      formData.files.add(MapEntry('profile_image', await MultipartFile.fromFile(image!.path)));
+    FormData formData = FormData.fromMap(body);
+    if (image != null) {
+      formData.files.add(
+          MapEntry('profile_image', await MultipartFile.fromFile(image!.path)));
     }
-    if(cover !=null){
-      formData.files.add(MapEntry('cover', await MultipartFile.fromFile(cover!.path)));
+    if (cover != null) {
+      formData.files
+          .add(MapEntry('cover', await MultipartFile.fromFile(cover!.path)));
     }
     try {
-      final response = await DioHelper.post('update-profile', true, formData: formData);
+      final response =
+          await DioHelper.post('update-profile', true, formData: formData);
       final data = response.data as Map<String, dynamic>;
       if (data['status'] == 1) {
-        UserModel registerOneModel=UserModel.fromJson(data);
+        UserModel registerOneModel = UserModel.fromJson(data);
         await AppStorage.cacheRegisterOneInfo(registerOneModel);
         showSnackBar(data['massage']);
-
       } else {
         showSnackBar(data['massage']);
       }
-    } catch (e,s) {
+    } catch (e, s) {
       showDefaultError();
-      print(e);
-      print(s);
+      if (kDebugMode) {
+        print(e);
+      }
+      if (kDebugMode) {
+        print(s);
+      }
     }
     emit(SettingsInit());
   }

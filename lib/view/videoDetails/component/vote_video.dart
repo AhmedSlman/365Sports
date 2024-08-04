@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sportat/const/base_url.dart';
@@ -132,20 +133,29 @@ class _VoteVideoState extends State<VoteVideo> {
                             fontSize: 10,
                             fontColor: Colors.white,
                             onPress: () {
-                              Share.share(getBaseUrl +
-                                  controller.videoPage!.data!.videos!);
+                              final videoPage = controller.videoPage;
+                              final videoData = videoPage?.data;
+                              final videos = videoData?.videos;
+
+                              if (videos != null) {
+                                Share.share(getBaseUrl + videos);
+                              } else {
+                                if (kDebugMode) {
+                                  print('No video data available.');
+                                }
+                              }
                             },
                           ),
-                        ),
+                        )
                       ],
                     ),
                     TextWidget(
                       text: LocaleKeys.VideoDetails_votes.tr(),
-                      number: video!.votes.toString(),
+                      number: video != null ? video.votes.toString() : '0',
                     ),
                     TextWidget(
                       text: LocaleKeys.VideoDetails_views.tr(),
-                      number: video.views.toString(),
+                      number: video?.views.toString() ?? '0',
                     ),
                   ],
                 ),
@@ -155,16 +165,16 @@ class _VoteVideoState extends State<VoteVideo> {
                 ListTile(
                   contentPadding: EdgeInsets.zero,
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage(video.clientImage == null
+                    backgroundImage: NetworkImage(video?.clientImage == null
                         ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'
-                        : getBaseUrl + video.clientImage!),
+                        : getBaseUrl + video!.clientImage!),
                   ),
                   title: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                        text: '#${video.tags}',
+                        text: '#${video?.tags}',
                         color: secColor,
                         fontSize: 12,
                       ),
@@ -172,7 +182,7 @@ class _VoteVideoState extends State<VoteVideo> {
                         height: 1,
                       ),
                       CustomText(
-                        text: video.name,
+                        text: video?.name,
                         fontSize: 14,
                       ),
                       const SizedBox(
@@ -184,7 +194,7 @@ class _VoteVideoState extends State<VoteVideo> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                        text: video.createdAt,
+                        text: video?.createdAt,
                         color: Colors.grey,
                         fontSize: 12,
                       ),
@@ -192,7 +202,7 @@ class _VoteVideoState extends State<VoteVideo> {
                         height: 1,
                       ),
                       CustomText(
-                        text: video.description,
+                        text: video?.description,
                         fontSize: 12,
                         color: Colors.grey,
                       ),

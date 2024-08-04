@@ -12,7 +12,8 @@ class UserInformation extends StatelessWidget {
       this.name,
       this.description,
       this.views,
-      this.votes, this.onTap})
+      this.votes,
+      this.onTap})
       : super(key: key);
   final bool? isPageSettings;
   final String? name;
@@ -44,7 +45,7 @@ class UserInformation extends StatelessWidget {
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  text: '$description  ' ,
+                  text: '$description  ',
                   style: DefaultTextStyle.of(context).style,
                   children: <TextSpan>[
                     isPageSettings == true
@@ -54,8 +55,7 @@ class UserInformation extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
                                 decoration: TextDecoration.underline),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = onTap)
+                            recognizer: TapGestureRecognizer()..onTap = onTap)
                         : const TextSpan(text: ""),
                   ],
                 ),

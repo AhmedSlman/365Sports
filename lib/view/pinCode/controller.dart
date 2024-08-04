@@ -11,7 +11,9 @@ import 'package:sportat/view/resetPassword/view.dart';
 import 'package:sportat/widgets/snack_bar.dart';
 
 class PinCodeController extends Cubit<PinCodeStates> {
-  PinCodeController(this.email,this.phone, this.isForget,this.isGuest, this.isCheck,this.item ) : super(PinCodeInit());
+  PinCodeController(this.email, this.phone, this.isForget, this.isGuest,
+      this.isCheck, this.item)
+      : super(PinCodeInit());
 
   static PinCodeController of(context) => BlocProvider.of(context);
 
@@ -22,9 +24,7 @@ class PinCodeController extends Cubit<PinCodeStates> {
   TextEditingController code = TextEditingController();
   bool isForget;
   bool isGuest;
- final bool? isCheck;
-
-
+  final bool? isCheck;
 
   final formKey = GlobalKey<FormState>();
 
@@ -39,12 +39,13 @@ class PinCodeController extends Cubit<PinCodeStates> {
     };
     emit(PinCodeLoading());
     try {
-      final response =
-          await DioHelper.post('${phone==null?'guest/':''}check-pin-code', false, body: email!=null?guestBody:body);
+      final response = await DioHelper.post(
+          '${phone == null ? 'guest/' : ''}check-pin-code', false,
+          body: email != null ? guestBody : body);
       final data = response.data as Map<String, dynamic>;
       if (data['status'] == 1) {
         await showSuccessVerification();
-        isGuest==true;
+        isGuest == true;
         isForget
             ? MagicRouter.navigateTo(
                 ResetPasswordView(
@@ -52,15 +53,17 @@ class PinCodeController extends Cubit<PinCodeStates> {
                   phone: phone,
                 ),
               )
-            :phone!=null? MagicRouter.navigateTo(
-                CompleteSignupView(
-                  phone: phone,
-                  item: item,
-                ),
-              ): MagicRouter.navigateTo(
-          NavBarView(),
-        );
-        isGuest==true;
+            : phone != null
+                ? MagicRouter.navigateTo(
+                    CompleteSignupView(
+                      phone: phone,
+                      item: item,
+                    ),
+                  )
+                : MagicRouter.navigateTo(
+                    const NavBarView(),
+                  );
+        isGuest == true;
         showSnackBar(data['massage']);
       } else {
         showSnackBar(data['massage']);
@@ -71,20 +74,17 @@ class PinCodeController extends Cubit<PinCodeStates> {
     emit(PinCodeInit());
   }
 
-  Future<void> resendCode()async{
+  Future<void> resendCode() async {
     final body = {
       'phone': phone,
     };
-    final response=await DioHelper.post('resend', true,body: body);
-    final data=response.data as Map;
-    if(data['status']==1){
+    final response = await DioHelper.post('resend', true, body: body);
+    final data = response.data as Map;
+    if (data['status'] == 1) {
       showSnackBar(data['massage']);
-    }else{
+    } else {
       showSnackBar(data['massage']);
-
     }
     emit(PinCodeInit());
   }
-
-
 }

@@ -42,9 +42,9 @@ class _VideoDetailsViewState extends State<VideoDetailsView> {
                     ? const Text('')
                     : CustomText(
                         text: VideoDetailsController.of(context)
-                                .videoPage!
-                                .data!
-                                .title ??
+                                .videoPage
+                                ?.data
+                                ?.title ??
                             '',
                         fontSize: 14,
                         fontWeight: FontWeight.bold,

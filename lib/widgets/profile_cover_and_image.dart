@@ -85,7 +85,7 @@ class CoverAndImage extends StatelessWidget {
               width: circleRadius,
               height: circleRadius,
               decoration: const ShapeDecoration(
-                  shape: CircleBorder(), color: Colors.white),
+                  shape: CircleBorder(), color: Colors.grey),
               child: DecoratedBox(
                 decoration: ShapeDecoration(
                     shape: const CircleBorder(),
