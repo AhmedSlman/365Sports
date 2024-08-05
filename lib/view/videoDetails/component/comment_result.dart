@@ -8,22 +8,28 @@ class CommentResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final comments=VideoDetailsController.of(context).comments;
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: comments!.length,
-        itemBuilder: (context, index) =>  CommentCard(
-          image: comments[index].clientProfile==null?"https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg":getBaseUrl+comments[index].clientProfile,
-          date: comments[index].date,
-          name: comments[index].clientName,
-          content: comments[index].content,
-          time: comments[index].time,
+    final comments = VideoDetailsController.of(context).comments;
+    return Column(
+      children: [
+        Container(
+          color: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: comments!.length,
+            itemBuilder: (context, index) => CommentCard(
+              image: comments[index].clientProfile == null
+                  ? "https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg"
+                  : getBaseUrl + comments[index].clientProfile,
+              date: comments[index].date,
+              name: comments[index].clientName,
+              content: comments[index].content,
+              time: comments[index].time,
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

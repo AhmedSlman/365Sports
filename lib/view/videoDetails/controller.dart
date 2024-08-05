@@ -20,7 +20,10 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
   static VideoDetailsController of(context) => BlocProvider.of(context);
 
   TextEditingController comment = TextEditingController();
+
   Future<void> getVideoDetails(int? id) async {
+    if (id == null) return;
+
     emit(VideoDetailsLoading());
     try {
       final response = await DioHelper.get('video-by-id?id=$id');
@@ -30,7 +33,7 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
           : data['data']['is_vote_client'];
       videoPage = VideoPageModel.fromJson(data);
       comments!.clear();
-      comments!.addAll(videoPage!.data!.comments!);
+      comments!.addAll(videoPage!.data!.comments ?? []);
     } catch (e, s) {
       print(e);
       print(s);
@@ -40,72 +43,82 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
   }
 
   Future<void> addComment(int? id) async {
+    if (id == null || comment.text.isEmpty)
+      return; // Check if id is null or comment is empty
+
     emit(AddingComment());
     final body = {'content': comment.text, 'video_id': '$id'};
     try {
-      if (comment.text != '') {
-        await DioHelper.post(
-            '${AppStorage.isGuestLogged ? 'guest/' : ''}add-comment', true,
-            body: body);
-      }
+      final response = await DioHelper.post(
+        '${AppStorage.isGuestLogged ? 'guest/' : ''}add-comment',
+        true,
+        body: body,
+      );
+      print('Comment Added: ${response.data}');
       comment.clear();
+      await getVideoDetails(id); // Refresh video details to include new comment
     } catch (e, s) {
       print(e);
       print(s);
       showDefaultError();
     }
-    getVideoDetails(id);
     emit(VideoDetailsInit());
   }
 
   Future<void> addOrRemoveVote(int? id) async {
+    if (id == null) return; // Check if id is null
+
     emit(AddingVote());
-
-    final Map<String, dynamic> data;
     final body = {'id': '$id'};
+    final endpoint = isVoted == 1
+        ? '${AppStorage.isGuestLogged ? 'guest/' : ''}remove-vote'
+        : '${AppStorage.isGuestLogged ? 'guest/' : ''}add-vote';
+
     try {
-      final response = await DioHelper.post(
-          isVoted == 1?'${AppStorage.isGuestLogged ? 'guest/' : ''}remove-vote': '${AppStorage.isGuestLogged ? 'guest/' : ''}add-vote', true,
-              body: body);
-
-      data = response.data as Map<String, dynamic>;
-
-      showSnackBar(data['massage']);
+      final response = await DioHelper.post(endpoint, true, body: body);
+      final data = response.data as Map<String, dynamic>;
+      showSnackBar(
+          data['message']); // Note: fixed typo from 'massage' to 'message'
+      await getVideoDetails(id); // Refresh video details to update vote status
     } catch (e, s) {
       print(e);
-
       print(s);
       showDefaultError();
     }
-     getVideoDetails(id);
-
     emit(VideoDetailsInit());
   }
 
   Future<void> addView(int? id) async {
+    if (id == null) return; // Check if id is null
+
     final body = {'video_id': '$id'};
     try {
       await DioHelper.post(
-          '${AppStorage.isGuestLogged ? 'guest/' : ''}add-view', true,
-          body: body);
+        '${AppStorage.isGuestLogged ? 'guest/' : ''}add-view',
+        true,
+        body: body,
+      );
+      await getVideoDetails(id); // Refresh video details to include new view
     } catch (e, s) {
       print(e);
       print(s);
       showDefaultError();
     }
-    getVideoDetails(id);
-
     emit(VideoDetailsInit());
   }
-  Future share(SocialMedia platform) async {
 
+  Future<void> share(SocialMedia platform) async {
     final urls = {
-      SocialMedia.facebook : (getBaseUrl+ videoPage!.data!.videos!)
-      ,SocialMedia.twitter : ('twitter shareable link')
-      ,SocialMedia.linkedln : ('face book linkedln link')
+      SocialMedia.facebook: getBaseUrl + (videoPage?.data?.videos ?? ''),
+      SocialMedia.twitter: 'twitter shareable link',
+      SocialMedia.linkedln: 'linkedin shareable link',
     };
-    final url = urls[platform]!;
-    await launch(url);
-  }
 
+    final url = urls[platform];
+    if (url != null && await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print('Could not launch $url');
+    }
+  }
 }

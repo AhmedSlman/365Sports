@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sportat/const/base_url.dart';
@@ -101,6 +102,8 @@ class _VoteVideoState extends State<VoteVideo> {
                     Row(
                       children: [
                         SizedBox(
+                          height: sizeFromHeight(20),
+                          width: sizeFromWidth(5),
                           child: CustomButton(
                             text: controller.isVoted == 1
                                 ? LocaleKeys.VideoDetails_voted.tr()
@@ -117,8 +120,6 @@ class _VoteVideoState extends State<VoteVideo> {
                             onPress: () =>
                                 controller.addOrRemoveVote(widget.id),
                           ),
-                          height: sizeFromHeight(20),
-                          width: sizeFromWidth(5),
                         ),
                         const SizedBox(
                           width: 13,
@@ -139,8 +140,10 @@ class _VoteVideoState extends State<VoteVideo> {
                               if (videos != null && videos.isNotEmpty) {
                                 Share.share(getBaseUrl + videos);
                               } else {
-                                print(
-                                    '*********No video data available.****************');
+                                if (kDebugMode) {
+                                  print(
+                                      '*********No video data available.****************');
+                                }
                               }
                             },
                           ),
@@ -158,7 +161,7 @@ class _VoteVideoState extends State<VoteVideo> {
                   ],
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 14,
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
@@ -172,7 +175,8 @@ class _VoteVideoState extends State<VoteVideo> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                        text: '#${video?.tags}',
+                        text: video?.tags ?? "",
+                        // text: '#${video?.tags}',
                         color: secColor,
                         fontSize: 12,
                       ),
@@ -180,7 +184,7 @@ class _VoteVideoState extends State<VoteVideo> {
                         height: 1,
                       ),
                       CustomText(
-                        text: video?.name,
+                        text: video?.name ?? "",
                         fontSize: 14,
                       ),
                       const SizedBox(
@@ -192,7 +196,7 @@ class _VoteVideoState extends State<VoteVideo> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                        text: video?.createdAt,
+                        text: video?.createdAt ?? "",
                         color: Colors.grey,
                         fontSize: 12,
                       ),
@@ -200,7 +204,7 @@ class _VoteVideoState extends State<VoteVideo> {
                         height: 1,
                       ),
                       CustomText(
-                        text: video?.description,
+                        text: video?.description ?? '',
                         fontSize: 12,
                         color: Colors.grey,
                       ),

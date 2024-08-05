@@ -7,13 +7,13 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     Key? key,
     this.text = '',
-    this.fontSize = 16,
+    this.fontSize = 12,
     this.fontColor = Colors.white,
     this.onPress,
     this.radius = 9,
     this.buttonColor,
     this.borderColor,
-    this.verticalPadding=15,
+    this.verticalPadding = 15,
   }) : super(key: key);
 
   final String text;
@@ -28,11 +28,13 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: borderColor !=null?borderColor!: Colors.black12, width: 1.5),
+        border: Border.all(
+            color: borderColor != null ? borderColor! : Colors.black12,
+            width: 1.5),
         color: const Color.fromRGBO(0, 181, 137, 1),
         borderRadius: BorderRadius.circular(radius),
         gradient: buttonColor != null
-            ?  LinearGradient(colors: [buttonColor!, buttonColor!])
+            ? LinearGradient(colors: [buttonColor!, buttonColor!])
             : const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -41,7 +43,7 @@ class CustomButton extends StatelessWidget {
                     Colors.black,
                   ]),
       ),
-      padding:  EdgeInsets.symmetric(horizontal: 15, vertical: verticalPadding),
+      padding: EdgeInsets.symmetric(horizontal: 11, vertical: verticalPadding),
       child: InkWell(
         onTap: onPress,
         child: Row(
