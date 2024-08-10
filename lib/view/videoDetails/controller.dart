@@ -34,17 +34,19 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
       videoPage = VideoPageModel.fromJson(data);
       comments!.clear();
       comments!.addAll(videoPage!.data!.comments ?? []);
+      print(comments);
     } catch (e, s) {
       print(e);
       print(s);
-      showDefaultError();
+      // showDefaultError();
     }
     emit(VideoDetailsInit());
   }
 
   Future<void> addComment(int? id) async {
-    if (id == null || comment.text.isEmpty)
-      return; // Check if id is null or comment is empty
+    if (id == null || comment.text.isEmpty) {
+      return;
+    }
 
     emit(AddingComment());
     final body = {'content': comment.text, 'video_id': '$id'};
@@ -56,7 +58,7 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
       );
       print('Comment Added: ${response.data}');
       comment.clear();
-      await getVideoDetails(id); // Refresh video details to include new comment
+      await getVideoDetails(id);
     } catch (e, s) {
       print(e);
       print(s);
@@ -66,7 +68,7 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
   }
 
   Future<void> addOrRemoveVote(int? id) async {
-    if (id == null) return; // Check if id is null
+    if (id == null) return;
 
     emit(AddingVote());
     final body = {'id': '$id'};
@@ -77,9 +79,8 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
     try {
       final response = await DioHelper.post(endpoint, true, body: body);
       final data = response.data as Map<String, dynamic>;
-      showSnackBar(
-          data['message']); // Note: fixed typo from 'massage' to 'message'
-      await getVideoDetails(id); // Refresh video details to update vote status
+      showSnackBar(data['message']);
+      await getVideoDetails(id);
     } catch (e, s) {
       print(e);
       print(s);
@@ -89,9 +90,10 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
   }
 
   Future<void> addView(int? id) async {
-    if (id == null) return; // Check if id is null
+    if (id == null) return;
 
     final body = {'video_id': '$id'};
+
     try {
       await DioHelper.post(
         '${AppStorage.isGuestLogged ? 'guest/' : ''}add-view',
@@ -115,7 +117,9 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
     };
 
     final url = urls[platform];
+    // ignore: deprecated_member_use
     if (url != null && await canLaunch(url)) {
+      // ignore: deprecated_member_use
       await launch(url);
     } else {
       print('Could not launch $url');

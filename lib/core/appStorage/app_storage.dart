@@ -18,6 +18,7 @@ abstract class AppStorage {
   }
 
   static bool get isLogged =>
+      getToken != null ||
       registerOneInfo != null && getRegisterOneData!.firstName != '';
 
   ///for register one
