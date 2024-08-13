@@ -9,9 +9,10 @@ import 'package:sportat/core/appStorage/app_storage.dart';
 import 'package:sportat/core/dioHelper/dio_helper.dart';
 import 'package:sportat/core/models/user_model.dart';
 import 'package:sportat/core/router/router.dart';
-import 'package:sportat/view/pinCode/view.dart';
 import 'package:sportat/view/signup/states.dart';
 import 'package:sportat/widgets/snack_bar.dart';
+
+import '../navBar/view.dart';
 
 class SignUpController extends Cubit<SignupStates> {
   SignUpController() : super(SignUpInit());
@@ -56,13 +57,14 @@ class SignUpController extends Cubit<SignupStates> {
         UserModel userModel = UserModel.fromJson(data);
         await AppStorage.cacheRegisterOneInfo(userModel);
         showSnackBar(data['massage']);
-        MagicRouter.navigateTo(PinCodeView(
-          email: null,
-          phone: phone,
-          item: '$item',
-          isForget: false,
-          isGuest: false,
-        ));
+        MagicRouter.navigateTo(NavBarView());
+        // MagicRouter.navigateTo(PinCodeView(
+        //   email: null,
+        //   phone: phone,
+        //   item: '$item',
+        //   isForget: false,
+        //   isGuest: false,
+        // ));
       } else {
         showSnackBar(data['massage']);
         isCheck == false

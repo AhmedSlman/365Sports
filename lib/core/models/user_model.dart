@@ -151,10 +151,10 @@ class Data {
   String clientAUthImage;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        token: json["token"] == null ? '' : json["token"],
+        token: json["token"] ?? '',
         user: User.fromJson(json["user"]),
         clientAUthImage:
-            json["clientAUthImage"] == null ? '' : json["clientAUthImage"],
+            json["clientAUthImage"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -214,13 +214,9 @@ class User {
   String code;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"] == null ? 0 : json["id"],
-        createdAt: DateTime.parse(json["created_at"] == null
-            ? '2022-02-24T15:17:17.000000Z'
-            : json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"] == null
-            ? '2022-02-24T15:17:17.000000Z'
-            : json["updated_at"]),
+        id: json["id"] ?? 0,
+        createdAt: DateTime.parse(json["created_at"] ?? '2022-02-24T15:17:17.000000Z'),
+        updatedAt: DateTime.parse(json["updated_at"] ?? '2022-02-24T15:17:17.000000Z'),
         email: json["email"],
         phone: json["phone"],
         relativePhone: json["relative_phone"] ?? '',
@@ -230,21 +226,19 @@ class User {
         provider: json["provider"],
         pinCode: json["pin_code"].toString(),
         pinCodeDateExpired: json["pin_code_date_expired"],
-        firstName: json["first_name"] == null ? '' : json["first_name"],
-        lastName: json["last_name"] == null ? '' : json["last_name"],
-        gender: json["gender"] == null ? '' : json["gender"],
+        firstName: json["first_name"] ?? '',
+        lastName: json["last_name"] ?? '',
+        gender: json["gender"] ?? '',
         nationaltyId:
-            json["nationalty_id"] == null ? '' : json["nationalty_id"],
+            json["nationalty_id"] ?? '',
         countryId:
             json["country_id"] == null ? '' : json["country_id"].toString(),
         typeIdentifier:
-            json["type_identifier"] == null ? '1' : json["type_identifier"],
-        expirationDate: DateTime.parse(json["expiration_date"] == null
-            ? '2026-06-06'
-            : json["expiration_date"]),
+            json["type_identifier"] ?? '1',
+        expirationDate: DateTime.parse(json["expiration_date"] ?? '2026-06-06'),
         numberIdentifier:
-            json["number_identifier"] == null ? '' : json["number_identifier"],
-        bio: json["bio"] == null ? '' : json["bio"],
+            json["number_identifier"] ?? '',
+        bio: json["bio"] ?? '',
         code: json["code"] ?? '',
       );
 
