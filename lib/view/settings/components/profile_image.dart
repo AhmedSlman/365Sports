@@ -12,7 +12,7 @@ class ProfileImage extends StatelessWidget {
     final controller = SettingsController.of(context);
     return BlocBuilder(
       bloc: controller,
-      builder: (context,state)=> CoverAndImage(
+      builder: (context, state) => CoverAndImage(
         isPageSettings: true,
         image: controller.personalInfoModel!.data!.user!.profileImage == null
             ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'

@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -68,13 +68,14 @@ class SettingsController extends Cubit<SettingsStates> {
     if (!formKey.currentState!.validate()) return;
     formKey.currentState!.save();
     emit(EditSettingsLoading());
+
     final body = {
       'first_name': firstName.text,
       'last_name': lastName.text,
       'country_id': '45',
       'email': email.text,
       'phone': phone.text,
-      'd_o_b': dateOfBirth.text,
+      'd_o_b': convertDateFormat(dateOfBirth.text),
       'bio': bio.text,
     };
     FormData formData = FormData.fromMap(body);
@@ -99,12 +100,8 @@ class SettingsController extends Cubit<SettingsStates> {
       }
     } catch (e, s) {
       showDefaultError();
-      if (kDebugMode) {
-        print(e);
-      }
-      if (kDebugMode) {
-        print(s);
-      }
+      print(e);
+      print(s);
     }
     emit(SettingsInit());
   }
@@ -123,5 +120,16 @@ class SettingsController extends Cubit<SettingsStates> {
     if (pickedImage == null) return;
     cover = File(pickedImage.path);
     emit(SettingsInit());
+  }
+
+  String convertDateFormat(String date) {
+    try {
+      DateTime parsedDate = DateFormat('dd/MM/yyyy').parse(date);
+      String formattedDate = DateFormat('yyyy-MM-dd').format(parsedDate);
+      return formattedDate;
+    } catch (e) {
+      print('Error parsing date: $e');
+      return '';
+    }
   }
 }

@@ -107,7 +107,7 @@ class PersonalInformationTextFields extends StatelessWidget {
               validator: (value) => Validator.phoneNumber(value!),
             ),
             InputFormField(
-              hint: "06/06-2006",
+              hint: "6-06-2006",
               fillColor: lightGrey,
               validator: (value) => Validator.phoneNumber(value!),
               controller: controller.dateOfBirth,

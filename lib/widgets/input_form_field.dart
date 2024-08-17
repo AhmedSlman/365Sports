@@ -38,7 +38,7 @@ class InputFormField extends StatefulWidget {
     this.onPressed,
     this.onSave,
     this.secure = false,
-    this.hint='',
+    this.hint = '',
     this.validator,
     this.onChanged,
     this.suffixIcon,
@@ -55,7 +55,8 @@ class InputFormField extends StatefulWidget {
     this.fillColor,
     this.textColor,
     this.labelColor,
-    this.isRequired, this.radius=6,
+    this.isRequired,
+    this.radius = 6,
   }) : super(key: key);
 
   @override
@@ -63,7 +64,6 @@ class InputFormField extends StatefulWidget {
 }
 
 class _InputFormFieldState extends State<InputFormField> {
-
   late bool _showPassword;
 
   @override
@@ -135,8 +135,8 @@ class _InputFormFieldState extends State<InputFormField> {
                           color: Colors.grey,
                           size: 18,
                         ),
-                  suffixIcon: widget.suffixIcon == null
-                      ? widget.secure
+                  suffixIcon: widget.suffixIcon ??
+                      (widget.secure
                           ? IconButton(
                               padding: const EdgeInsets.all(0),
                               icon: Icon(
@@ -149,8 +149,7 @@ class _InputFormFieldState extends State<InputFormField> {
                               onPressed: () => setState(
                                   () => _showPassword = !_showPassword),
                             )
-                          : null
-                      : widget.suffixIcon,
+                          : null),
                   hintText: widget.hasLabel ? null : widget.hint,
                   labelText: widget.hasLabel ? widget.hint : null,
                   contentPadding: EdgeInsets.symmetric(

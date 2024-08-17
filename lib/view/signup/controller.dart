@@ -85,7 +85,7 @@ class SignUpController extends Cubit<SignupStates> {
 
   selectDate() async {
     DateTime? pickedDate = await showModalBottomSheet<DateTime>(
-      context: MagicRouter.currentContext,
+      context: MagicRouter.currentContext!,
       builder: (context) {
         DateTime? tempPickedDate;
         return SizedBox(
@@ -130,7 +130,8 @@ class SignUpController extends Cubit<SignupStates> {
 
     if (pickedDate != null && pickedDate != selectedDate) {
       selectedDate = pickedDate;
-      final String formatter = DateFormat('yyyy-MM-dd').format(pickedDate);
+      final String formatter = DateFormat('yyyy-MM-dd', 'en_US')
+          .format(pickedDate); // Use English locale
       dateOfBirth.text = formatter;
       emit(SignUpInit());
     }

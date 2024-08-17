@@ -6,7 +6,6 @@ import 'package:sportat/firebase_options.dart';
 import 'package:sportat/translations/codegen_loader.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sportat/view/splash/view.dart';
-import 'package:sportat/view/welcome/view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
