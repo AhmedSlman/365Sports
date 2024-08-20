@@ -18,6 +18,7 @@ class PersonalInformationTextFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = SettingsController.of(context);
+
     return Container(
       width: double.infinity,
       color: Colors.white,

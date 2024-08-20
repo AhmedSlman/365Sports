@@ -14,9 +14,11 @@ import 'package:url_launcher/url_launcher.dart';
 
 class VideoDetailsController extends Cubit<VideoDetailsStates> {
   VideoDetailsController() : super(VideoDetailsInit());
+
   VideoPageModel? videoPage;
-  List<Comment>? comments = [];
+  List<Comment> comments = []; // تعديل من List<Comment>? إلى List<Comment>
   int? isVoted;
+
   static VideoDetailsController of(context) => BlocProvider.of(context);
 
   TextEditingController comment = TextEditingController();
@@ -28,12 +30,21 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
     try {
       final response = await DioHelper.get('video-by-id?id=$id');
       final data = response!.data as Map<String, dynamic>;
+
+      // التحقق من حالة التصويت
       isVoted = AppStorage.isGuestLogged
           ? data['data']['is_vote_guest']
           : data['data']['is_vote_client'];
+
+      // تعيين البيانات إلى نموذج الفيديو
       videoPage = VideoPageModel.fromJson(data);
-      comments!.clear();
-      comments!.addAll(videoPage!.data!.comments ?? []);
+
+      // تحديث قائمة التعليقات
+      comments.clear();
+      if (videoPage?.data?.comments != null) {
+        comments.addAll(videoPage!.data!.comments!);
+      }
+
       print(comments);
     } catch (e, s) {
       print(e);

@@ -70,18 +70,29 @@ class HomeController extends Cubit<HomeStates> {
   }
 
   Future<List<Datu>?> pagination(int page) async {
-    for (int i = 2; i < homeModel!.data!.length; i++) {
-      try {
-        final response = await DioHelper.get(
-            "${AppStorage.isGuestLogged ? 'guest/' : ''}home?page=$i");
-        final data = response!.data as Map<String, dynamic>;
-        final homeModel = HomeModel.fromJson(data);
-        homeVideos.addAll(homeModel.data!);
-      } catch (e) {
-        showDefaultError();
+    if (homeModel != null && homeModel!.data != null) {
+      for (int i = 2; i < homeModel!.data!.length; i++) {
+        try {
+          final response = await DioHelper.get(
+              "${AppStorage.isGuestLogged ? 'guest/' : ''}home?page=$i");
+          final data = response!.data as Map<String, dynamic>;
+          final newHomeModel = HomeModel.fromJson(data);
+
+          final filteredVideos = newHomeModel.data!.where((video) {
+            return selectedCategory == null ||
+                video.categoryId == selectedCategory;
+          }).toList();
+
+          homeVideos.addAll(filteredVideos);
+        } catch (e) {
+          showDefaultError();
+        }
       }
+    } else {
+      showDefaultError();
     }
-    return null;
+
+    return homeVideos;
   }
 
   int page = 1;
@@ -107,7 +118,7 @@ class HomeController extends Cubit<HomeStates> {
 
   void setCategory(String? category) {
     selectedCategory = category;
-    page = 1; // Reset page number for new category
-    loadVideos(); // Reload videos based on selected category
+    page = 1;
+    loadVideos();
   }
 }

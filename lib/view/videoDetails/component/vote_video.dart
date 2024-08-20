@@ -29,7 +29,6 @@ class _VoteVideoState extends State<VoteVideo> {
     super.initState();
     videoController = VideoPlayerController.network(widget.image!)
       ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
         videoController!.setLooping(true);
 

@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:sportat/const/base_url.dart';
-import 'package:sportat/view/videoDetails/controller.dart';
+import 'package:sportat/core/models/video_page_model.dart';
 import 'package:sportat/view/videoDetails/widget/comment_card.dart';
 
+// تعديل الكلاس لقبول قائمة التعليقات كخاصية
 class CommentResult extends StatelessWidget {
-  const CommentResult({Key? key}) : super(key: key);
+  final List<Comment> comments; // خاصية التعليقات
+
+  const CommentResult({
+    Key? key,
+    required this.comments, // تلقي قائمة التعليقات عند الإنشاء
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final comments = VideoDetailsController.of(context).comments;
     return Column(
       children: [
         Container(
@@ -17,11 +22,11 @@ class CommentResult extends StatelessWidget {
           child: ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: comments!.length,
+            itemCount: comments.length, // استخدام خاصية التعليقات
             itemBuilder: (context, index) => CommentCard(
               image: comments[index].clientProfile == null
                   ? "https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg"
-                  : getBaseUrl + comments[index].clientProfile,
+                  : getBaseUrl + comments[index].clientProfile!,
               date: comments[index].date,
               name: comments[index].clientName,
               content: comments[index].content,

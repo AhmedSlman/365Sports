@@ -41,7 +41,8 @@ class _VideoDetailsViewState extends State<VideoDetailsView> {
                 state is VideoDetailsLoading
                     ? const Text('')
                     : CustomText(
-                        text: VideoDetailsController.of(context)
+                        text: context
+                                .read<VideoDetailsController>()
                                 .videoPage
                                 ?.data
                                 ?.title ??
@@ -52,17 +53,24 @@ class _VideoDetailsViewState extends State<VideoDetailsView> {
           ),
         ),
         body: BlocBuilder<VideoDetailsController, VideoDetailsStates>(
-          builder: (BuildContext context, state) => state is VideoDetailsLoading
-              ? const LoadingIndicator()
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      VoteVideo(id: widget.id, image: widget.image),
-                      Comment(id: widget.id),
-                      const CommentResult()
-                    ],
-                  ),
+          builder: (BuildContext context, state) {
+            if (state is VideoDetailsLoading) {
+              return const LoadingIndicator();
+            } else {
+              final comments = context.read<VideoDetailsController>().comments;
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    VoteVideo(id: widget.id, image: widget.image),
+                    Comment(id: widget.id),
+                    CommentResult(
+                      comments: comments,
+                    ),
+                  ],
                 ),
+              );
+            }
+          },
         ),
       ),
     );
