@@ -104,21 +104,28 @@ class _VoteVideoState extends State<VoteVideo> {
                           height: sizeFromHeight(20),
                           width: sizeFromWidth(5),
                           child: CustomButton(
-                            text: controller.isVoted == 1
-                                ? LocaleKeys.VideoDetails_voted.tr()
-                                : LocaleKeys.VideoDetails_vote.tr(),
-                            borderColor: controller.isVoted == 1
-                                ? secColor
-                                : Colors.black,
-                            buttonColor: controller.isVoted == 1
-                                ? secColor
-                                : Colors.white,
-                            fontColor: Colors.black,
-                            verticalPadding: 5,
-                            fontSize: 12,
-                            onPress: () =>
-                                controller.addOrRemoveVote(widget.id),
-                          ),
+                              text: controller.isVoted == 1
+                                  ? LocaleKeys.VideoDetails_voted.tr()
+                                  : LocaleKeys.VideoDetails_vote.tr(),
+                              borderColor: controller.isVoted == 1
+                                  ? secColor
+                                  : Colors.black,
+                              buttonColor: controller.isVoted == 1
+                                  ? secColor
+                                  : Colors.white,
+                              fontColor: Colors.black,
+                              verticalPadding: 5,
+                              fontSize: 12,
+                              onPress: () {
+                                if (videoController != null) {
+                                  if (videoController!.value.isPlaying) {
+                                    videoController?.pause();
+                                    controller.addOrRemoveVote(widget.id);
+                                  }
+                                } else {
+                                  controller.addOrRemoveVote(widget.id);
+                                }
+                              }),
                         ),
                         const SizedBox(
                           width: 13,

@@ -55,7 +55,7 @@ class _VideoCardState extends State<VideoCard> {
       ..initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
-        controller!.setLooping(true);
+        // controller!.setLooping(true);
         controller?.pause();
         // controller!.play();
       });
