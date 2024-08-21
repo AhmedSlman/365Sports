@@ -11,6 +11,7 @@ import 'package:sportat/view/videoDetails/states.dart';
 import 'package:sportat/view/videoDetails/widget/share_button.dart';
 import 'package:sportat/widgets/snack_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:video_player/video_player.dart';
 
 class VideoDetailsController extends Cubit<VideoDetailsStates> {
   VideoDetailsController() : super(VideoDetailsInit());
@@ -18,6 +19,7 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
   VideoPageModel? videoPage;
   List<Comment> comments = []; // تعديل من List<Comment>? إلى List<Comment>
   int? isVoted;
+  VideoPlayerController? controller;
 
   static VideoDetailsController of(context) => BlocProvider.of(context);
 
@@ -31,15 +33,12 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
       final response = await DioHelper.get('video-by-id?id=$id');
       final data = response!.data as Map<String, dynamic>;
 
-      // التحقق من حالة التصويت
       isVoted = AppStorage.isGuestLogged
           ? data['data']['is_vote_guest']
           : data['data']['is_vote_client'];
 
-      // تعيين البيانات إلى نموذج الفيديو
       videoPage = VideoPageModel.fromJson(data);
 
-      // تحديث قائمة التعليقات
       comments.clear();
       if (videoPage?.data?.comments != null) {
         comments.addAll(videoPage!.data!.comments!);
@@ -49,7 +48,6 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
     } catch (e, s) {
       print(e);
       print(s);
-      // showDefaultError();
     }
     emit(VideoDetailsInit());
   }
@@ -58,7 +56,7 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
     if (id == null || comment.text.isEmpty) {
       return;
     }
-
+    // controller!.pause();
     emit(AddingComment());
     final body = {'content': comment.text, 'video_id': '$id'};
     try {
@@ -69,11 +67,12 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
       );
       print('Comment Added: ${response.data}');
       comment.clear();
+      // controller!.pause();
       await getVideoDetails(id);
     } catch (e, s) {
       print(e);
       print(s);
-      showDefaultError();
+      // showDefaultError();
     }
     emit(VideoDetailsInit());
   }
@@ -82,6 +81,7 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
     if (id == null) return;
 
     emit(AddingVote());
+
     final body = {'id': '$id'};
     final endpoint = isVoted == 1
         ? '${AppStorage.isGuestLogged ? 'guest/' : ''}remove-vote'
@@ -90,12 +90,13 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
     try {
       final response = await DioHelper.post(endpoint, true, body: body);
       final data = response.data as Map<String, dynamic>;
-      showSnackBar(data['message']);
+      // showSnackBar(data['message']);
+      // controller!.pause();
       await getVideoDetails(id);
     } catch (e, s) {
       print(e);
       print(s);
-      showDefaultError();
+      // showDefaultError();
     }
     emit(VideoDetailsInit());
   }
@@ -111,7 +112,6 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
         true,
         body: body,
       );
-      await getVideoDetails(id); // Refresh video details to include new view
     } catch (e, s) {
       print(e);
       print(s);

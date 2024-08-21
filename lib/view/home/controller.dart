@@ -7,6 +7,7 @@ import 'package:sportat/core/dioHelper/dio_helper.dart';
 import 'package:sportat/core/models/check_model.dart';
 import 'package:sportat/core/models/home_model.dart';
 import 'package:sportat/view/home/states.dart';
+import 'package:video_player/video_player.dart';
 
 List? categories = [];
 

@@ -9,22 +9,19 @@ import 'package:sportat/view/videoDetails/controller.dart';
 import 'package:sportat/view/videoDetails/states.dart';
 import 'package:sportat/widgets/custom_text.dart';
 import 'package:sportat/widgets/loading_indicator.dart';
+import 'package:video_player/video_player.dart';
 
-class VideoDetailsView extends StatefulWidget {
-  const VideoDetailsView({Key? key, this.id, this.image}) : super(key: key);
+class VideoDetailsView extends StatelessWidget {
+  VideoDetailsView({Key? key, this.id, this.image}) : super(key: key);
   final int? id;
   final String? image;
+  VideoPlayerController? controller;
 
-  @override
-  State<VideoDetailsView> createState() => _VideoDetailsViewState();
-}
-
-class _VideoDetailsViewState extends State<VideoDetailsView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) =>
-          VideoDetailsController()..getVideoDetails(widget.id),
+          VideoDetailsController()..getVideoDetails(id),
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
         appBar: AppBar(
@@ -56,19 +53,21 @@ class _VideoDetailsViewState extends State<VideoDetailsView> {
           builder: (BuildContext context, state) {
             if (state is VideoDetailsLoading) {
               return const LoadingIndicator();
-            } else {
+            } else if (state is VideoDetailsInit) {
               final comments = context.read<VideoDetailsController>().comments;
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    VoteVideo(id: widget.id, image: widget.image),
-                    Comment(id: widget.id),
+                    VoteVideo(id: id, image: image),
+                    Comment(id: id),
                     CommentResult(
                       comments: comments,
                     ),
                   ],
                 ),
               );
+            } else {
+              return const SizedBox.shrink();
             }
           },
         ),

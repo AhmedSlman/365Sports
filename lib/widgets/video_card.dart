@@ -56,7 +56,7 @@ class _VideoCardState extends State<VideoCard> {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
         controller!.setLooping(true);
-
+        controller?.pause();
         // controller!.play();
       });
   }
@@ -64,10 +64,25 @@ class _VideoCardState extends State<VideoCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => AppStorage.isLogged || AppStorage.isGuestLogged
-          ? MagicRouter.navigateTo(
-              VideoDetailsView(id: widget.id, image: widget.image))
-          : showAlertDilog(),
+      onTap: () {
+        if (controller!.value.isPlaying) {
+          controller!.pause();
+          AppStorage.isLogged || AppStorage.isGuestLogged
+              ? MagicRouter.navigateTo(
+                  VideoDetailsView(id: widget.id, image: widget.image))
+              : showAlertDilog();
+        } else {
+          AppStorage.isLogged || AppStorage.isGuestLogged
+              ? MagicRouter.navigateTo(
+                  VideoDetailsView(id: widget.id, image: widget.image))
+              : showAlertDilog();
+        }
+      },
+
+      // onTap: () => AppStorage.isLogged || AppStorage.isGuestLogged
+      //     ? MagicRouter.navigateTo(
+      //         VideoDetailsView(id: widget.id, image: widget.image))
+      //     : showAlertDilog(),
       child: Container(
         margin: const EdgeInsets.only(bottom: 15),
         color: Colors.white,
@@ -164,52 +179,13 @@ class _VideoCardState extends State<VideoCard> {
                         ),
                       ],
                     ),
-                    trailing: widget.isLive==true?SizedBox(): Column(
-                      children: [
-                        InkWell(
-                          child: CustomText(
-                            text: LocaleKeys.report.tr(),
-                            color: Colors.red,
-                            fontSize: 14,
-                          ),
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                title: CustomText(
-                                  text: LocaleKeys.report.tr(),
-                                  color: Colors.red,
-                                  fontSize: 16,
-                                ),
-                                content: CustomText(
-                                  text: LocaleKeys.reportThisVideo.tr(),
-                                  fontSize: 14,
-                                ),
-                                actions: [
-                                  CustomTextButton(
-                                    text: LocaleKeys.confirm.tr(),
-                                    onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                          content: CustomText(
-                                            text: LocaleKeys.weWillReview.tr(),
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  )
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                        AppStorage.isLogged
-                            ? SizedBox()
-                            : InkWell(
+                    trailing: widget.isLive == true
+                        ? SizedBox()
+                        : Column(
+                            children: [
+                              InkWell(
                                 child: CustomText(
-                                  text: LocaleKeys.block.tr(),
+                                  text: LocaleKeys.report.tr(),
                                   color: Colors.red,
                                   fontSize: 14,
                                 ),
@@ -218,7 +194,7 @@ class _VideoCardState extends State<VideoCard> {
                                     context: context,
                                     builder: (context) => AlertDialog(
                                       title: CustomText(
-                                        text: LocaleKeys.block.tr(),
+                                        text: LocaleKeys.report.tr(),
                                         color: Colors.red,
                                         fontSize: 16,
                                       ),
@@ -234,8 +210,8 @@ class _VideoCardState extends State<VideoCard> {
                                               context: context,
                                               builder: (context) => AlertDialog(
                                                 content: CustomText(
-                                                  text:
-                                                      LocaleKeys.youcannot.tr(),
+                                                  text: LocaleKeys.weWillReview
+                                                      .tr(),
                                                   fontSize: 14,
                                                 ),
                                               ),
@@ -246,9 +222,54 @@ class _VideoCardState extends State<VideoCard> {
                                     ),
                                   );
                                 },
-                              )
-                      ],
-                    ),
+                              ),
+                              AppStorage.isLogged
+                                  ? SizedBox()
+                                  : InkWell(
+                                      child: CustomText(
+                                        text: LocaleKeys.block.tr(),
+                                        color: Colors.red,
+                                        fontSize: 14,
+                                      ),
+                                      onTap: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                            title: CustomText(
+                                              text: LocaleKeys.block.tr(),
+                                              color: Colors.red,
+                                              fontSize: 16,
+                                            ),
+                                            content: CustomText(
+                                              text: LocaleKeys.reportThisVideo
+                                                  .tr(),
+                                              fontSize: 14,
+                                            ),
+                                            actions: [
+                                              CustomTextButton(
+                                                text: LocaleKeys.confirm.tr(),
+                                                onPressed: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        AlertDialog(
+                                                      content: CustomText(
+                                                        text: LocaleKeys
+                                                            .youcannot
+                                                            .tr(),
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    )
+                            ],
+                          ),
                   )
                 ],
               ),
