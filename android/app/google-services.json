@@ -7,6 +7,44 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:476506250443:android:e2e11ac8acc58e0b3d8f4e",
+        "android_client_info": {
+          "package_name": "com.example.sports_without_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGYK54PlQLB_5wKAj78nOqO9ECTEy9CtM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476506250443:android:361abed90632c8c63d8f4e",
+        "android_client_info": {
+          "package_name": "com.fourthpyramid.sportat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGYK54PlQLB_5wKAj78nOqO9ECTEy9CtM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:476506250443:android:0c237089e415d4293d8f4e",
         "android_client_info": {
           "package_name": "com.sport.sportat"

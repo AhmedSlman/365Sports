@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'sportat-9f0c2.appspot.com',
     iosBundleId: 'com.sport.sportat',
   );
+
 }

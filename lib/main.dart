@@ -18,7 +18,7 @@ void main() async {
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('ar')],
       path: 'assets/translations',
-      fallbackLocale: const Locale('en'),
+      fallbackLocale: const Locale('en'), 
       assetLoader: const CodegenLoader(),
       child: const Sport(),
     ),

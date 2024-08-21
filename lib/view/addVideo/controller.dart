@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ffmpeg/flutter_ffmpeg.dart';
-import 'package:flutter_ffmpeg/media_information.dart';
+// import 'package:flutter_ffmpeg/flutter_ffmpeg.dart';
+// import 'package:flutter_ffmpeg/media_information.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sportat/const/default_error.dart';
 import 'package:sportat/core/dioHelper/dio_helper.dart';
@@ -82,21 +82,21 @@ class AddVideoController extends Cubit<AddVideoStates> {
     //   trimmer: trimmer,
     //   maxVideoLength: const Duration(seconds: 60),
     // );
-    final FlutterFFprobe flutterFFprobe = FlutterFFprobe();
-    MediaInformation mediaInformation =
-        await flutterFFprobe.getMediaInformation(pickedFile.path);
-    if (kDebugMode) {
-      print(mediaInformation.getAllProperties()['streams'][0]['duration']);
-    }
-    String duration =
-        mediaInformation.getAllProperties()['streams'][0]['duration'];
-    if (double.parse(duration) > 60) {
-      file = null;
-      error = 'Video Duration Must Be less than 1 Minute';
-      if (kDebugMode) {
-        print(error);
-      }
-    }
+    // final FlutterFFprobe flutterFFprobe = FlutterFFprobe();
+    // MediaInformation mediaInformation =
+    //     await flutterFFprobe.getMediaInformation(pickedFile.path);
+    // if (kDebugMode) {
+    //   print(mediaInformation.getAllProperties()['streams'][0]['duration']);
+    // }
+    // String duration =
+    //     mediaInformation.getAllProperties()['streams'][0]['duration'];
+    // if (double.parse(duration) > 60) {
+    //   file = null;
+    //   error = 'Video Duration Must Be less than 1 Minute';
+    //   if (kDebugMode) {
+    //     print(error);
+    //   }
+    // }
     emit(CameraLoading());
     emit(AddVideoInit());
   }
