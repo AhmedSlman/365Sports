@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sportat/const/colors.dart';
 import 'package:sportat/const/dimensions.dart';
 import 'package:sportat/core/appStorage/app_storage.dart';
@@ -9,19 +9,17 @@ import 'package:sportat/view/videoDetails/view.dart';
 import 'package:sportat/widgets/alert_dialog.dart';
 import 'package:sportat/widgets/custom_text.dart';
 import 'package:sportat/widgets/custom_text_button.dart';
+import 'package:sportat/widgets/video_manager.dart';
 import 'package:video_player/video_player.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class VideoCard extends StatefulWidget {
   final String? image;
   final String? usrImage;
-
   final String? videoDuration;
   final int? id;
   final String? videoTitle;
-
   final String? name;
-
   final String? date;
   final VoidCallback? onTap;
   final String? viewsNumber;
@@ -51,38 +49,27 @@ class _VideoCardState extends State<VideoCard> {
   @override
   void initState() {
     super.initState();
-    controller = VideoPlayerController.network(widget.image!)
+    controller = VideoPlayerController.networkUrl(Uri.parse(widget.image!))
       ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
-        // controller!.setLooping(true);
         controller?.pause();
-        // controller!.play();
       });
   }
 
   @override
   Widget build(BuildContext context) {
+    final videoManager = VideoManager.of(context);
+
     return GestureDetector(
       onTap: () {
         if (controller!.value.isPlaying) {
           controller!.pause();
-          AppStorage.isLogged || AppStorage.isGuestLogged
-              ? MagicRouter.navigateTo(
-                  VideoDetailsView(id: widget.id, image: widget.image))
-              : showAlertDilog();
-        } else {
-          AppStorage.isLogged || AppStorage.isGuestLogged
-              ? MagicRouter.navigateTo(
-                  VideoDetailsView(id: widget.id, image: widget.image))
-              : showAlertDilog();
         }
+        AppStorage.isLogged || AppStorage.isGuestLogged
+            ? MagicRouter.navigateTo(
+                VideoDetailsView(id: widget.id, image: widget.image))
+            : showAlertDilog();
       },
-
-      // onTap: () => AppStorage.isLogged || AppStorage.isGuestLogged
-      //     ? MagicRouter.navigateTo(
-      //         VideoDetailsView(id: widget.id, image: widget.image))
-      //     : showAlertDilog(),
       child: Container(
         margin: const EdgeInsets.only(bottom: 15),
         color: Colors.white,
@@ -91,11 +78,12 @@ class _VideoCardState extends State<VideoCard> {
             if (controller!.value.isInitialized)
               GestureDetector(
                 onTap: () {
-                  widget.onTap;
                   setState(() {
                     if (controller!.value.isPlaying) {
                       controller!.pause();
                     } else {
+                      // Notify VideoManager to pause the current active video
+                      videoManager?.setActiveController(controller);
                       controller!.play();
                     }
                   });
@@ -103,26 +91,48 @@ class _VideoCardState extends State<VideoCard> {
                 child: Stack(
                   children: [
                     AspectRatio(
-                      aspectRatio: 1 / .6,
+                      aspectRatio: controller!.value.aspectRatio,
                       child: VideoPlayer(controller!),
                     ),
-                    controller!.value.isPlaying
-                        ? const Text("")
-                        : Positioned(
-                            top: 0,
-                            bottom: 0,
-                            right: sizeFromWidth(2) - 10,
-                            child: CircleAvatar(
-                              radius: 20,
-                              backgroundColor: Colors.black.withOpacity(1),
-                              child: const Icon(Icons.play_arrow),
-                            )),
                     Positioned(
+                      top: 10,
+                      right: 10,
+                      child: IconButton(
+                        icon: const Icon(Icons.fullscreen),
+                        color: Colors.white,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FullScreenVideoPlayer(
+                                controller: controller!,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    if (!controller!.value.isPlaying)
+                      Positioned(
+                        top: 0,
                         bottom: 0,
-                        child: SizedBox(
-                            width: sizeFromWidth(1),
-                            child: VideoProgressIndicator(controller!,
-                                allowScrubbing: true))),
+                        right: sizeFromWidth(2) - 10,
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.black.withOpacity(1),
+                          child: const Icon(Icons.play_arrow),
+                        ),
+                      ),
+                    Positioned(
+                      bottom: 0,
+                      child: SizedBox(
+                        width: sizeFromWidth(1),
+                        child: VideoProgressIndicator(
+                          controller!,
+                          allowScrubbing: true,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               )
@@ -146,11 +156,6 @@ class _VideoCardState extends State<VideoCard> {
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
-                    // trailing: CustomText(
-                    //   text: videoDuration!,
-                    //   fontSize: 12,
-                    //   color: const Color(0xff949494),
-                    // ),
                   ),
                   ListTile(
                     title: CustomText(
@@ -282,7 +287,91 @@ class _VideoCardState extends State<VideoCard> {
 
   @override
   void dispose() {
-    super.dispose();
     controller!.dispose();
+    super.dispose();
+  }
+}
+
+//Full Screen Widget
+class FullScreenVideoPlayer extends StatefulWidget {
+  final VideoPlayerController controller;
+
+  const FullScreenVideoPlayer({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
+  @override
+  _FullScreenVideoPlayerState createState() => _FullScreenVideoPlayerState();
+}
+
+class _FullScreenVideoPlayerState extends State<FullScreenVideoPlayer> {
+  @override
+  void initState() {
+    super.initState();
+
+    // Rotate the screen to landscape mode when entering full-screen
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+
+    // Hide the notification bar and enable immersive mode
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  }
+
+  @override
+  void dispose() {
+    // Restore the screen orientation to portrait mode when exiting full-screen
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
+    // Restore the system UI overlays when exiting full-screen
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                if (widget.controller.value.isPlaying) {
+                  widget.controller.pause();
+                } else {
+                  widget.controller.play();
+                }
+              });
+            },
+            child: Container(
+              color: Colors.black,
+              child: Center(
+                child: AspectRatio(
+                  aspectRatio: widget.controller.value.aspectRatio,
+                  child: VideoPlayer(widget.controller),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 10,
+            right: 10,
+            child: IconButton(
+              icon: Icon(Icons.fullscreen_exit),
+              color: Colors.white,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
