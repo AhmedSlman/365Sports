@@ -35,10 +35,14 @@ class _VoteVideoState extends State<VoteVideo> {
     videoController = VideoPlayerController.network(widget.image!)
       ..initialize().then((_) {
         setState(() {});
-        videoController!.setLooping(true);
-
-        videoController!.play();
+        videoController!.setLooping(false);
+        videoController?.play();
       });
+  }
+
+  void dispose() {
+    super.dispose();
+    videoController?.dispose();
   }
 
   @override
