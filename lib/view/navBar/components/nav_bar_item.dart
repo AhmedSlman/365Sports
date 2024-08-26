@@ -45,22 +45,22 @@ class NavBarItem extends StatelessWidget {
               ),
               AppStorage.isGuestLogged
                   ? CustomIconButton(
-                      icon: Icons.logout,
-                      color: currentIndex == 3
-                          ? primaryColor
-                          : const Color.fromRGBO(183, 201, 213, 1),
-                      onPressed: () async => await AppStorage.signOut(),
-                    )
+                icon: Icons.logout,
+                color: currentIndex == 3
+                    ? primaryColor
+                    : const Color.fromRGBO(183, 201, 213, 1),
+                onPressed: () async => await AppStorage.signOut(),
+              )
                   : InkWell(
-                      onTap: () => controller.changeIndex(3),
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          AppStorage.getUserImage == null
-                              ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'
-                              : getBaseUrl + AppStorage.getUserImage!,
-                        ),
-                      ),
-                    ),
+                onTap: () => controller.changeIndex(3),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                    AppStorage.getUserImage == null
+                        ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'
+                        : getBaseUrl + AppStorage.getUserImage!,
+                  ),
+                ),
+              ),
             ],
           ),
         );

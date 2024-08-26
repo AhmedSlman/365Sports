@@ -10,7 +10,6 @@ import 'package:sportat/const/dimensions.dart';
 import 'package:sportat/translations/locale_keys.g.dart';
 import 'package:sportat/view/videoDetails/controller.dart';
 import 'package:sportat/view/videoDetails/states.dart';
-import 'package:sportat/view/videoDetails/view.dart';
 import 'package:sportat/view/videoDetails/widget/text_widget.dart';
 import 'package:sportat/widgets/custom_button.dart';
 import 'package:sportat/widgets/custom_text.dart';
@@ -84,8 +83,8 @@ class _VoteVideoState extends State<VoteVideo> {
                       right: sizeFromWidth(2) - 10,
                       child: CircleAvatar(
                         radius: 20,
-                        backgroundColor: Colors.black.withOpacity(1),
-                        child: const Icon(Icons.play_arrow),
+                        backgroundColor: Colors.white.withOpacity(0.8),
+                        child: const Icon(Icons.play_arrow,color:primaryColor),
                       )),
                   Positioned(
                       bottom: 0,

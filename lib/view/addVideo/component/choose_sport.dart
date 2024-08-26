@@ -37,7 +37,7 @@ class _ChooseSportState extends State<ChooseSport> {
           ),
           CustomText(
             text: categories![index]['name'],
-            fontSize: 14,
+            fontSize: 12,
           )
         ],
       ),
