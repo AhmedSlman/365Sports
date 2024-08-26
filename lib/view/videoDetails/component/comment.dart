@@ -79,22 +79,22 @@ class _CommentState extends State<Comment> {
               builder: (BuildContext context, state) => state is AddingComment
                   ? const LoadingIndicator()
                   : CustomButton(
-                      text: LocaleKeys.VideoDetails_send.tr(),
-                      verticalPadding: 5,
-                      fontSize: 16,
-                      fontColor: Colors.white,
-                      onPress: () {
-                        if (videoPlayerController != null) {
-                          if (videoPlayerController!.value.isPlaying) {
-                            videoPlayerController!.pause();
-                          }
-                        }
+                text: LocaleKeys.VideoDetails_send.tr(),
+                verticalPadding: 5,
+                fontSize: 16,
+                fontColor: Colors.white,
+                onPress: () {
+                  if (videoPlayerController != null) {
+                    if (videoPlayerController!.value.isPlaying) {
+                      videoPlayerController!.pause();
+                    }
+                  }
 
-                        Future.delayed(const Duration(milliseconds: 100), () {
-                          controller.addComment(widget.id);
-                        });
-                      },
-                    ),
+                  Future.delayed(const Duration(milliseconds: 100), () {
+                    controller.addComment(widget.id);
+                  });
+                },
+              ),
             ),
           ),
         ],

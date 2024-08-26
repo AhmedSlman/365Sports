@@ -9,6 +9,7 @@ import 'package:sportat/core/dioHelper/dio_helper.dart';
 import 'package:sportat/core/models/video_page_model.dart';
 import 'package:sportat/view/videoDetails/states.dart';
 import 'package:sportat/view/videoDetails/widget/share_button.dart';
+import 'package:sportat/widgets/snack_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
@@ -69,11 +70,6 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
       print('Comment Added: ${response.data}');
       comment.clear();
       // controller!.pause();
-      if (controller?.value.isPlaying == true) {
-        controller?.pause();
-      } else {
-        return;
-      }
       await getVideoDetails(id);
     } catch (e, s) {
       print(e);

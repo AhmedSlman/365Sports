@@ -21,7 +21,7 @@ class VideoDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) =>
-          VideoDetailsController()..getVideoDetails(id),
+      VideoDetailsController()..getVideoDetails(id),
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
         appBar: AppBar(
@@ -35,18 +35,18 @@ class VideoDetailsView extends StatelessWidget {
           centerTitle: true,
           title: BlocBuilder<VideoDetailsController, VideoDetailsStates>(
             builder: (BuildContext context, state) =>
-                state is VideoDetailsLoading
-                    ? const Text('')
-                    : CustomText(
-                        text: context
-                                .read<VideoDetailsController>()
-                                .videoPage
-                                ?.data
-                                ?.title ??
-                            '',
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
+            state is VideoDetailsLoading
+                ? const Text('')
+                : CustomText(
+              text: context
+                  .read<VideoDetailsController>()
+                  .videoPage
+                  ?.data
+                  ?.title ??
+                  '',
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         body: BlocBuilder<VideoDetailsController, VideoDetailsStates>(
