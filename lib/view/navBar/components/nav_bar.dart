@@ -18,6 +18,7 @@ class NavBar extends StatelessWidget {
       bloc: controller,
       builder: (context, state) => Scaffold(
         backgroundColor: Colors.white,
+        resizeToAvoidBottomInset: false,
         body: controller.getCurrentView,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: AppStorage.isGuestLogged

@@ -11,13 +11,13 @@ class FloatingActionChild extends StatelessWidget {
     return Container(
       width: 60,
       height: 60,
-      child: const Icon(
-        Icons.add,
-        color: Colors.black,
-      ),
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
        color: Color.fromRGBO(238, 209, 18, 1)
+      ),
+      child: const Icon(
+        Icons.add,
+        color: Colors.black,
       ),
     );
   }

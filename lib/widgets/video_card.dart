@@ -363,7 +363,7 @@ class _FullScreenVideoPlayerState extends State<FullScreenVideoPlayer> {
             top: 10,
             right: 10,
             child: IconButton(
-              icon: Icon(Icons.fullscreen_exit),
+              icon: const Icon(Icons.fullscreen_exit),
               color: Colors.white,
               onPressed: () {
                 Navigator.pop(context);
