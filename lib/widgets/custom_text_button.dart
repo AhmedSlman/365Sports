@@ -10,7 +10,8 @@ class CustomTextButton extends StatelessWidget {
     this.onPressed,
     this.alignment,
     this.fontWeight,
-    this.fontSize, this.decoration,
+    this.fontSize,
+    this.decoration,
   }) : super(key: key);
   final String text;
   final Color? color;
@@ -24,6 +25,7 @@ class CustomTextButton extends StatelessWidget {
     return Container(
       alignment: alignment,
       child: TextButton(
+        onPressed: onPressed,
         child: Text(
           text,
           style: TextStyle(
@@ -33,7 +35,6 @@ class CustomTextButton extends StatelessWidget {
             fontWeight: fontWeight,
           ),
         ),
-        onPressed: onPressed,
       ),
     );
   }

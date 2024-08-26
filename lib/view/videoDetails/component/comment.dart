@@ -14,10 +14,10 @@ class Comment extends StatefulWidget {
   const Comment({
     Key? key,
     this.id,
-    this.videoUrl, // Add videoUrl parameter
+    this.videoUrl,
   }) : super(key: key);
   final int? id;
-  final String? videoUrl; // Add videoUrl parameter
+  final String? videoUrl;
 
   @override
   State<Comment> createState() => _CommentState();
@@ -33,11 +33,11 @@ class _CommentState extends State<Comment> {
       videoPlayerController = VideoPlayerController.network(widget.videoUrl!)
         ..initialize().then((_) {
           setState(() {});
-          videoPlayerController!.setLooping(true);
-          // Optionally play video initially if needed
+          videoPlayerController!.setLooping(false);
+          videoPlayerController?.pause();
+
           // videoPlayerController!.play();
         }).catchError((error) {
-          // Handle initialization errors if needed
           print('Error initializing video player: $error');
         });
     }
@@ -45,6 +45,10 @@ class _CommentState extends State<Comment> {
 
   @override
   void dispose() {
+    if (videoPlayerController != null &&
+        videoPlayerController!.value.isPlaying) {
+      videoPlayerController!.pause();
+    }
     videoPlayerController?.dispose();
     super.dispose();
   }
@@ -85,7 +89,10 @@ class _CommentState extends State<Comment> {
                             videoPlayerController!.pause();
                           }
                         }
-                        controller.addComment(widget.id);
+
+                        Future.delayed(const Duration(milliseconds: 100), () {
+                          controller.addComment(widget.id);
+                        });
                       },
                     ),
             ),

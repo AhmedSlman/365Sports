@@ -46,6 +46,7 @@ class NavBarCubit extends Cubit<NavBarStates> {
         "${AppStorage.isGuestLogged ? 'guest/' : ''}home",
       );
       final data = response?.data as Map<String, dynamic>;
+      // ignore: unnecessary_null_comparison
       if (data != null) {
         homeModel = HomeModel.fromJson(data);
         emit(NavBarHomeDataLoaded(homeModel));

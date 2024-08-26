@@ -20,6 +20,7 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
   List<Comment> comments = [];
   int? isVoted;
   VideoPlayerController? controller;
+  bool isAddingComment = false;
 
   static VideoDetailsController of(context) => BlocProvider.of(context);
 
@@ -56,6 +57,8 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
     if (id == null || comment.text.isEmpty) {
       return;
     }
+    // controller?.pause();
+    isAddingComment = true;
     emit(AddingComment());
     final body = {'content': comment.text, 'video_id': '$id'};
     try {
@@ -139,5 +142,14 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
     } else {
       print('Could not launch $url');
     }
+  }
+
+  void setVideoController(VideoPlayerController controller) {
+    controller = controller;
+    emit(VideoDetailsInit());
+  }
+
+  void pauseVideo() {
+    controller?.pause();
   }
 }

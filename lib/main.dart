@@ -6,6 +6,7 @@ import 'package:sportat/firebase_options.dart';
 import 'package:sportat/translations/codegen_loader.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sportat/view/splash/view.dart';
+import 'package:sportat/widgets/video_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,9 +19,9 @@ void main() async {
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('ar')],
       path: 'assets/translations',
-      fallbackLocale: const Locale('en'), 
+      fallbackLocale: const Locale('en'),
       assetLoader: const CodegenLoader(),
-      child: const Sport(),
+      child: const VideoManager(child: Sport()),
     ),
   );
 }
