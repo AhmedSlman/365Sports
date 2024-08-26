@@ -1,4 +1,4 @@
-package com.sport.sportat
+package com.fourthpyramid.sportat
 
 import io.flutter.embedding.android.FlutterActivity
 

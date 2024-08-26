@@ -17,7 +17,7 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
   VideoDetailsController() : super(VideoDetailsInit());
 
   VideoPageModel? videoPage;
-  List<Comment> comments = []; // تعديل من List<Comment>? إلى List<Comment>
+  List<Comment> comments = [];
   int? isVoted;
   VideoPlayerController? controller;
 
@@ -56,7 +56,6 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
     if (id == null || comment.text.isEmpty) {
       return;
     }
-    // controller!.pause();
     emit(AddingComment());
     final body = {'content': comment.text, 'video_id': '$id'};
     try {
@@ -68,6 +67,11 @@ class VideoDetailsController extends Cubit<VideoDetailsStates> {
       print('Comment Added: ${response.data}');
       comment.clear();
       // controller!.pause();
+      if (controller?.value.isPlaying == true) {
+        controller?.pause();
+      } else {
+        return;
+      }
       await getVideoDetails(id);
     } catch (e, s) {
       print(e);

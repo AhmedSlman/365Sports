@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sportat/const/colors.dart';
@@ -51,11 +53,11 @@ class _VideoCardState extends State<VideoCard> {
   @override
   void initState() {
     super.initState();
+
     controller = VideoPlayerController.network(widget.image!)
       ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
-        // controller!.setLooping(true);
+        controller!.setLooping(true);
         controller?.pause();
         // controller!.play();
       });
@@ -78,11 +80,6 @@ class _VideoCardState extends State<VideoCard> {
               : showAlertDilog();
         }
       },
-
-      // onTap: () => AppStorage.isLogged || AppStorage.isGuestLogged
-      //     ? MagicRouter.navigateTo(
-      //         VideoDetailsView(id: widget.id, image: widget.image))
-      //     : showAlertDilog(),
       child: Container(
         margin: const EdgeInsets.only(bottom: 15),
         color: Colors.white,
@@ -180,7 +177,7 @@ class _VideoCardState extends State<VideoCard> {
                       ],
                     ),
                     trailing: widget.isLive == true
-                        ? SizedBox()
+                        ? const SizedBox()
                         : Column(
                             children: [
                               InkWell(
@@ -224,7 +221,7 @@ class _VideoCardState extends State<VideoCard> {
                                 },
                               ),
                               AppStorage.isLogged
-                                  ? SizedBox()
+                                  ? const SizedBox()
                                   : InkWell(
                                       child: CustomText(
                                         text: LocaleKeys.block.tr(),

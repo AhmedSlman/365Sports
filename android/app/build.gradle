@@ -47,7 +47,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.sport.sportat"
+        applicationId "com.fourthpyramid.sportat"
         minSdkVersion 24
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
