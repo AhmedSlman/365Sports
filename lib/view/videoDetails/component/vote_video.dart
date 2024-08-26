@@ -130,14 +130,15 @@ class _VoteVideoState extends State<VoteVideo> {
                                 verticalPadding: 5,
                                 fontSize: 12,
                                 onPress: () {
-                                  if (videoController != null) {
-                                    if (videoController!.value.isPlaying) {
-                                      videoController?.pause();
-                                      controller.addOrRemoveVote(widget.id);
-                                    }
-                                  } else {
-                                    controller.addOrRemoveVote(widget.id);
-                                  }
+                                  controller.addOrRemoveVote(widget.id);
+                                  // if (videoController != null) {
+                                  //   if (videoController!.value.isPlaying) {
+                                  //     videoController?.pause();
+                                  //     controller.addOrRemoveVote(widget.id);
+                                  //   }
+                                  // } else {
+                                  //   controller.addOrRemoveVote(widget.id);
+                                  // }
                                 }),
                           ),
                           const SizedBox(
