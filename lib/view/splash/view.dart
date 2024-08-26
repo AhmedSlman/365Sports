@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sportat/const/dimensions.dart';
 import 'package:sportat/core/appStorage/app_storage.dart';
 import 'package:sportat/core/router/router.dart';
-import 'package:sportat/translations/locale_keys.g.dart';
 import 'package:sportat/view/chooseLanguage/view.dart';
 import 'package:sportat/view/navBar/view.dart';
 
@@ -29,6 +28,7 @@ class _SplashViewState extends State<SplashView> {
 
       if (token != null) {
         MagicRouter.navigateAndPopAll(const NavBarView());
+        print("token: $token");
       } else {
         MagicRouter.navigateAndPopAll(const ChooseLanguageView());
       }
