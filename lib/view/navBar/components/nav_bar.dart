@@ -6,6 +6,8 @@ import 'package:sportat/view/navBar/components/nav_bar_item.dart';
 import 'package:sportat/view/navBar/cubit.dart';
 import 'package:sportat/view/navBar/widgets/floating_action_child.dart';
 
+import '../../../const/colors.dart';
+
 class NavBar extends StatelessWidget {
   const NavBar({Key? key}) : super(key: key);
 
@@ -21,14 +23,20 @@ class NavBar extends StatelessWidget {
         floatingActionButton: AppStorage.isGuestLogged
             ? const Text("")
             : FloatingActionButton(
-                child: const FloatingActionChild(),
-                onPressed: () {
-                  addVideoForm(context);
-                },
-              ),
+          shape: const CircleBorder(),
+          child: const FloatingActionChild(
+
+          ),
+          onPressed: () {
+            addVideoForm(context);
+          },
+        ),
         bottomNavigationBar: const BottomAppBar(
           notchMargin: 8.0,
-          shape: CircularNotchedRectangle(),
+          color: lightGrey,
+          shape: CircularNotchedRectangle(
+
+          ),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: NavBarItem(),

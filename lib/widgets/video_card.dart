@@ -119,8 +119,8 @@ class _VideoCardState extends State<VideoCard> {
                         right: sizeFromWidth(2) - 10,
                         child: CircleAvatar(
                           radius: 20,
-                          backgroundColor: Colors.black.withOpacity(1),
-                          child: const Icon(Icons.play_arrow),
+                          backgroundColor: Colors.white.withOpacity(0.8),
+                          child: const Icon(Icons.play_arrow,color: primaryColor,),
                         ),
                       ),
                     Positioned(

@@ -45,21 +45,22 @@ class UserInformation extends StatelessWidget {
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  text: '$description  ',
+                  text: description?.isNotEmpty == true ? description : LocaleKeys.EditBio_edit_bio.tr(),
                   style: DefaultTextStyle.of(context).style,
                   children: <TextSpan>[
-                    isPageSettings == true
-                        ? TextSpan(
-                            text: LocaleKeys.Settings_edit.tr(),
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                decoration: TextDecoration.underline),
-                            recognizer: TapGestureRecognizer()..onTap = onTap)
-                        : const TextSpan(text: ""),
+                    if (isPageSettings == true)
+                      TextSpan(
+                        text: ' ${LocaleKeys.Settings_edit.tr()}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          decoration: TextDecoration.underline,
+                        ),
+                        recognizer: TapGestureRecognizer()..onTap = onTap,
+                      ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

@@ -38,7 +38,7 @@ class PersonalInformationTextFields extends StatelessWidget {
               children: [
                 Expanded(
                     child: InputFormField(
-                  hint: "sportat",
+                      hint: LocaleKeys.CompleteSignUp_first_name.tr(),
                   fillColor: lightGrey,
                   controller: controller.firstName,
                   validator: (value) => Validator.name(value!),
@@ -48,7 +48,7 @@ class PersonalInformationTextFields extends StatelessWidget {
                 ),
                 Expanded(
                     child: InputFormField(
-                  hint: "sportat",
+                      hint: LocaleKeys.CompleteSignUp_last_name.tr(),
                   fillColor: lightGrey,
                   controller: controller.lastName,
                   validator: (value) => Validator.name(value!),
