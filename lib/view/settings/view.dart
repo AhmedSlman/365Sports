@@ -29,27 +29,49 @@ class SettingsView extends StatelessWidget {
             builder: (context, state) => state is SettingsLoading
                 ? const LoadingIndicator()
                 : SingleChildScrollView(
-              child: Column(
-                children: [
-                  const ProfileImage(),
-                  UserInformation(
-                    isPageSettings: true,
-                    name:
-                    '${SettingsController.of(context).personalInfoModel?.data?.user?.firstName ?? ''} ${SettingsController.of(context).personalInfoModel?.data?.user?.lastName ?? ''}',
-                    description: SettingsController.of(context)
-                        .personalInfoModel
-                        ?.data!
-                        .user!
-                        .bio
-                        ?.trim() ?? LocaleKeys.EditBio_edit_bio.tr(),
-                    onTap: () {
-                      showEditBioForm(context);
-                    },
+                    child: Column(
+                      children: [
+                        const ProfileImage(),
+                        UserInformation(
+                          isPageSettings: true,
+                          name:
+                              '${SettingsController.of(context).personalInfoModel?.data?.user?.firstName ?? ''} ${SettingsController.of(context).personalInfoModel?.data?.user?.lastName ?? ''}',
+                          description: SettingsController.of(context)
+                                  .personalInfoModel
+                                  ?.data!
+                                  .user!
+                                  .bio
+                                  ?.trim() ??
+                              LocaleKeys.EditBio_edit_bio.tr(),
+                          onTap: () {
+                            showEditBioForm(context);
+                          },
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const PersonalInformationTextFields(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                context.setLocale(const Locale('en'));
+                              },
+                              child: const Text('English'),
+                            ),
+                            const SizedBox(width: 20),
+                            ElevatedButton(
+                              onPressed: () {
+                                context.setLocale(const Locale('ar'));
+                              },
+                              child: const Text('العربية'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  const PersonalInformationTextFields(),
-                ],
-              ),
-            ),
           ),
         ),
       ),

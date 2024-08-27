@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sportat/const/dimensions.dart';
 import 'package:sportat/translations/locale_keys.g.dart';
-import 'package:sportat/view/addVideo/component/choose_sport.dart';
 import 'package:sportat/view/addVideo/component/upload_button.dart';
 import 'package:sportat/view/addVideo/component/upload_vedio.dart';
 import 'package:sportat/view/addVideo/component/upload_video_fields.dart';
@@ -17,7 +16,7 @@ void addVideoForm(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return BlocProvider(
-        create: (BuildContext context)=>AddVideoController(),
+        create: (BuildContext context) => AddVideoController(),
         child: Container(
           height: sizeFromHeight(1.25),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -34,19 +33,19 @@ void addVideoForm(BuildContext context) {
                     alignment: getAlignment(context),
                   ),
                   const UploadVideo(),
-                  BlocBuilder<AddVideoController,AddVideoStates>(
-                    builder:(BuildContext context,state)=> CustomText(
-                      text:AddVideoController.of(context).error ,
+                  BlocBuilder<AddVideoController, AddVideoStates>(
+                    builder: (BuildContext context, state) => CustomText(
+                      text: AddVideoController.of(context).error,
                       fontSize: 15,
                       color: Colors.red,
                     ),
                   ),
                   const UploadVideoFields(),
-                  CustomText(
-                    text: LocaleKeys.UploadVideo_choose_spoort.tr(),
-                    fontSize: 16,
-                  ),
-                  const ChooseSport(),
+                  // CustomText(
+                  //   text: LocaleKeys.UploadVideo_choose_spoort.tr(),
+                  //   fontSize: 16,
+                  // ),
+                  // const ChooseSport(),
                   const UploadButton()
                 ],
               ),

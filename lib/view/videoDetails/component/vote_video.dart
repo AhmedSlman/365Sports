@@ -34,10 +34,16 @@ class _VoteVideoState extends State<VoteVideo> {
     videoController = VideoPlayerController.network(widget.image!)
       ..initialize().then((_) {
         setState(() {});
-        videoController!.setLooping(true);
+        videoController!.setLooping(false);
 
         videoController!.play();
       });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    videoController!.dispose();
   }
 
   @override
@@ -59,51 +65,53 @@ class _VoteVideoState extends State<VoteVideo> {
           children: [
             videoController!.value.isInitialized
                 ? GestureDetector(
-              onTap: () {
-                controller.addView(widget.id);
-                setState(() {
-                  if (videoController!.value.isPlaying) {
-                    videoController!.pause();
-                  } else {
-                    videoController!.play();
-                  }
-                });
-              },
-              child: Stack(
-                children: [
-                  AspectRatio(
-                    aspectRatio: 1 / 1.3,
-                    child: VideoPlayer(videoController!),
-                  ),
-                  videoController!.value.isPlaying
-                      ? const Text("")
-                      : Positioned(
-                      top: 0,
-                      bottom: 0,
-                      right: sizeFromWidth(2) - 10,
-                      child: CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.white.withOpacity(0.8),
-                        child: const Icon(Icons.play_arrow,color:primaryColor),
-                      )),
-                  Positioned(
-                      bottom: 0,
-                      child: SizedBox(
-                          width: sizeFromWidth(1),
-                          child: VideoProgressIndicator(videoController!,
-                              allowScrubbing: true))),
-                ],
-              ),
-            )
+                    onTap: () {
+                      controller.addView(widget.id);
+                      setState(() {
+                        if (videoController!.value.isPlaying) {
+                          videoController!.pause();
+                        } else {
+                          videoController!.play();
+                        }
+                      });
+                    },
+                    child: Stack(
+                      children: [
+                        AspectRatio(
+                          aspectRatio: 1 / 1.3,
+                          child: VideoPlayer(videoController!),
+                        ),
+                        videoController!.value.isPlaying
+                            ? const Text("")
+                            : Positioned(
+                                top: 0,
+                                bottom: 0,
+                                right: sizeFromWidth(2) - 10,
+                                child: CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor:
+                                      Colors.white.withOpacity(0.8),
+                                  child: const Icon(Icons.play_arrow,
+                                      color: primaryColor),
+                                )),
+                        Positioned(
+                            bottom: 0,
+                            child: SizedBox(
+                                width: sizeFromWidth(1),
+                                child: VideoProgressIndicator(videoController!,
+                                    allowScrubbing: true))),
+                      ],
+                    ),
+                  )
                 : SizedBox(
-              height: sizeFromHeight(3),
-              child: shimmer(
-                child: Container(
-                  width: double.infinity,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+                    height: sizeFromHeight(3),
+                    child: shimmer(
+                      child: Container(
+                        width: double.infinity,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
