@@ -41,7 +41,7 @@ class AddVideoController extends Cubit<AddVideoStates> {
     emit(AddVideoLoading());
     final body = {
       'title': title.text,
-      'category_id': id,
+      'category_id': 1,
       'description': description,
       'tags': tags.text
     };

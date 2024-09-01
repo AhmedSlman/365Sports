@@ -14,7 +14,7 @@ class SearchControllerCubit extends Cubit<SearchStates> {
 
   Future<void> getSearchResults(String text) async {
     emit(SearchLoading());
-    final response = await DioHelper.get('search?search=$text');
+    final response = await DioHelper.get('home?search=$text');
     final data = response!.data as Map<String, dynamic>;
     if (data.containsKey('data')) {
       searchModel = SearchModel.fromJson(response.data);

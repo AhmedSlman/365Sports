@@ -5,7 +5,6 @@ import 'package:sportat/view/profile/view.dart';
 import 'package:sportat/view/search/widget/search_card.dart';
 import '../controller.dart';
 
-
 class SearchResult extends StatelessWidget {
   const SearchResult({Key? key}) : super(key: key);
 
@@ -32,6 +31,7 @@ class SearchResult extends StatelessWidget {
                       ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'
                       : getBaseUrl + searchModel[index].clientImage!,
                   name: searchModel[index].name!,
+                  
                 ),
               ),
               // ListView.builder(
