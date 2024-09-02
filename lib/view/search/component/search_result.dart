@@ -27,18 +27,10 @@ class SearchResult extends StatelessWidget {
                       id: searchModel[index].id,
                     ),
                   ),
-<<<<<<< HEAD
                   // image: searchModel[index].clientImage == null
                   //     ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'
                   //     : getBaseUrl + searchModel[index].!,
                   name: searchModel[index].firstName!,
-=======
-                  image: searchModel[index].clientImage == null
-                      ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'
-                      : getBaseUrl + searchModel[index].clientImage!,
-                  name: searchModel[index].name!,
-                  
->>>>>>> 3521e579d24ae5113028d4109837ce0ebe20893f
                 ),
               ),
 
