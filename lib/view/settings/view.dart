@@ -8,7 +8,6 @@ import 'package:sportat/view/settings/components/profile_image.dart';
 import 'package:sportat/view/settings/controller.dart';
 import 'package:sportat/view/settings/states.dart';
 import 'package:sportat/widgets/loading_indicator.dart';
-import 'package:sportat/widgets/profile_cover_and_image.dart';
 import 'package:sportat/widgets/profile_user_information.dart';
 import '../../translations/locale_keys.g.dart';
 import 'components/personal_information_text_fields.dart';
@@ -47,28 +46,7 @@ class SettingsView extends StatelessWidget {
                             showEditBioForm(context);
                           },
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
                         const PersonalInformationTextFields(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                context.setLocale(const Locale('en'));
-                              },
-                              child: const Text('English'),
-                            ),
-                            const SizedBox(width: 20),
-                            ElevatedButton(
-                              onPressed: () {
-                                context.setLocale(const Locale('ar'));
-                              },
-                              child: const Text('العربية'),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),

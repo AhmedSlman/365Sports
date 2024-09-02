@@ -11,19 +11,18 @@ class AppBarImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = ProfileController.of(context);
+    final profileImage = controller.profileModel?.data?.profileImage;
+    final coverImage = controller.profileModel?.data?.cover;
+
     return CoverAndImage(
       isPageSettings: false,
-      image: ProfileController.of(context).profileModel?.data?.profileImage ==
-              null
+      image: profileImage == null
           ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'
-          : getBaseUrl +
-              ProfileController.of(context).profileModel!.data!.profileImage!,
-      cover: controller.profileModel!.data!.cover == null
-          ? ''
-          : getBaseUrl + controller.profileModel!.data!.cover!,
+          : getBaseUrl + profileImage,
+      cover: coverImage == null ? '' : getBaseUrl + coverImage,
       onPressed: () => MagicRouter.navigateTo(
         SettingsView(
-          personalInfoModel: ProfileController.of(context).personalInfoModel,
+          personalInfoModel: controller.personalInfoModel,
         ),
       ),
       isSearch: controller.isSearch,

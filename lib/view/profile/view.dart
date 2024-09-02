@@ -8,14 +8,19 @@ import 'components/talent_videos.dart';
 import '../../widgets/profile_user_information.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({Key? key, this.id, this.isSearch, }) : super(key: key);
+  const ProfileView({
+    Key? key,
+    this.id,
+    this.isSearch,
+  }) : super(key: key);
   final int? id;
   final bool? isSearch;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => ProfileController(id: id,isSearch: isSearch!)..getData(),
+      create: (BuildContext context) =>
+          ProfileController(id: id, isSearch: isSearch!)..getData(),
       child: Scaffold(
         backgroundColor: const Color(0xffF1F1F1),
         body: BlocBuilder<ProfileController, ProfileStates>(
@@ -37,15 +42,17 @@ class ProfileView extends StatelessWidget {
                             ?.data
                             ?.bio,
                         views: ProfileController.of(context)
-                            .profileModel
-                            ?.data
-                            ?.views,
+                                .profileModel
+                                ?.data
+                                ?.views ??
+                            0,
                         votes: ProfileController.of(context)
-                            .profileModel
-                            ?.data
-                            ?.votes,
+                                .profileModel
+                                ?.data
+                                ?.votes ??
+                            0,
                       ),
-                      TalentVideos()
+                      const TalentVideos()
                     ],
                   ),
                 ),
