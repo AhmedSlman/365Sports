@@ -5,7 +5,6 @@ import 'package:sportat/view/profile/view.dart';
 import 'package:sportat/view/search/widget/search_card.dart';
 import '../controller.dart';
 
-
 class SearchResult extends StatelessWidget {
   const SearchResult({Key? key}) : super(key: key);
 
@@ -28,13 +27,14 @@ class SearchResult extends StatelessWidget {
                       id: searchModel[index].id,
                     ),
                   ),
-                  image: searchModel[index].clientImage == null
-                      ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'
-                      : getBaseUrl + searchModel[index].clientImage!,
-                  name: searchModel[index].name!,
+                  // image: searchModel[index].clientImage == null
+                  //     ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'
+                  //     : getBaseUrl + searchModel[index].!,
+                  name: searchModel[index].firstName!,
                 ),
               ),
-              // ListView.builder(
+
+              sea // ListView.builder(
               //   shrinkWrap: true,
               //   physics: const NeverScrollableScrollPhysics(),
               //   itemCount: searchModel.length,
