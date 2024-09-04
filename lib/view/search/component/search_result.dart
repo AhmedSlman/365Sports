@@ -20,35 +20,33 @@ class SearchResult extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: searchModel.length,
-                itemBuilder: (context, index) => SearchCard(
-                  onTap: () => MagicRouter.navigateTo(
-                    ProfileView(
-                      isSearch: true,
-                      id: searchModel[index].id,
-                    ),
-                  ),
-                  // image: searchModel[index].clientImage == null
-                  //     ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'
-                  //     : getBaseUrl + searchModel[index].!,
-                  name: searchModel[index].firstName!,
-                ),
-              ),
+                itemBuilder: (context, index) {
+                  final profilePictureUrl = searchModel[index].profilePicture ==
+                          null
+                      ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'
+                      : getBaseUrl + searchModel[index].profilePicture!;
 
-              sea // ListView.builder(
-              //   shrinkWrap: true,
-              //   physics: const NeverScrollableScrollPhysics(),
-              //   itemCount: searchModel.length,
-              //   itemBuilder: (context, index) =>  VideoCard(
-              //     id:searchModel[index].id,
-              //     image: getBaseUrl+searchModel[index],
-              //     usrImage:searchModel[index].clientImage==null?'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg': getBaseUrl+searchModel[index].clientImage!,
-              //     name: searchModel[index].name,
-              //     date: searchModel[index].createdAt,
-              //     viewsNumber: searchModel[index].views.toString(),
-              //     videoTitle:searchModel[index].title,
-              //     //videoDuration: "02:00 Mins",
-              //   ),
-              // )
+                  // طباعة رابط الصورة في وحدة التحكم
+                  print(
+                      "###############Profile Picture URL: $profilePictureUrl###############");
+
+                  return SearchCard(
+                    onTap: () {
+                      print(
+                          "***********************${searchModel[index].id}s*******************");
+                      MagicRouter.navigateTo(
+                        ProfileView(
+                          isSearch: true,
+                          id: searchModel[index].id,
+                        ),
+                      );
+                    },
+                    image: profilePictureUrl,
+                    name:
+                        "${searchModel[index].firstName} ${searchModel[index].lastName}",
+                  );
+                },
+              ),
             ],
           );
   }

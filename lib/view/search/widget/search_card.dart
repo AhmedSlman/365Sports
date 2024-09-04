@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sportat/widgets/custom_text.dart';
 
-
-
-
 class SearchCard extends StatelessWidget {
-  const SearchCard({Key? key, this.image, this.name, this.onTap}) : super(key: key);
-final String? image;
+  const SearchCard({Key? key, this.image, this.name, this.onTap})
+      : super(key: key);
+  final String? image;
   final String? name;
   final VoidCallback? onTap;
 

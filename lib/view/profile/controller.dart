@@ -23,7 +23,7 @@ class ProfileController extends Cubit<ProfileStates> {
     emit(ProfileLoading());
     try {
       final response = await DioHelper.get(
-          isSearch == false ? 'get-profile' : 'profile-by-id?id=$id');
+          isSearch == false ? 'get-profile' : 'get-profile-by-id/$id');
       final data = response?.data as Map<String, dynamic>;
       print(data);
       print(response);

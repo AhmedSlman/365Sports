@@ -68,6 +68,7 @@ class Datum {
     this.expirationDate,
     this.numberIdentifier,
     this.bio,
+    this.profilePicture,
     this.videos,
   });
 
@@ -92,6 +93,7 @@ class Datum {
   dynamic expirationDate;
   dynamic numberIdentifier;
   String? bio;
+  String? profilePicture; // خاصية صورة البروفايل
   List<Video>? videos;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -120,6 +122,7 @@ class Datum {
         expirationDate: json["expiration_date"],
         numberIdentifier: json["number_identifier"],
         bio: json["bio"],
+        profilePicture: json["profile_picture"],
         videos: json["videos"] != null
             ? List<Video>.from(json["videos"].map((x) => Video.fromJson(x)))
             : null,
@@ -147,6 +150,7 @@ class Datum {
         "expiration_date": expirationDate,
         "number_identifier": numberIdentifier,
         "bio": bio,
+        "profile_picture": profilePicture,
         "videos": videos != null
             ? List<dynamic>.from(videos!.map((x) => x.toJson()))
             : null,
