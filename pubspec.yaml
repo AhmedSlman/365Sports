@@ -54,6 +54,7 @@ dependencies:
   url_launcher: ^6.3.0
   video_player: ^2.9.1
 
+
 dev_dependencies:
 
   # The "flutter_lints" package below contains a set of recommended lints to

@@ -3,6 +3,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sportat/core/dioHelper/dio_helper.dart';
 import 'package:sportat/core/models/serach_model.dart';
+import 'package:sportat/core/models/user_model.dart';
 import 'package:sportat/view/search/states.dart';
 
 class SearchControllerCubit extends Cubit<SearchStates> {
@@ -18,7 +19,7 @@ class SearchControllerCubit extends Cubit<SearchStates> {
     final data = response!.data as Map<String, dynamic>;
     if (data.containsKey('data')) {
       searchModel = SearchModel.fromJson(response.data);
-      print(data);
+      print('####Response###${response.data}');
     }
     emit(SearchInit());
   }

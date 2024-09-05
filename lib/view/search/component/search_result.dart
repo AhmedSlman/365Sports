@@ -21,14 +21,14 @@ class SearchResult extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: searchModel.length,
                 itemBuilder: (context, index) {
-                  final profilePictureUrl = searchModel[index].profilePicture ==
-                          null
+                  final profilePictureUrl = searchModel[index].profilePicture == null
                       ? 'https://fourthpyramidagcy.net/sportat/uploads/thumbnails/talent/profileImage/2022-01-24/default.jpeg-_-1643020873.jpeg'
                       : getBaseUrl + searchModel[index].profilePicture!;
 
                   // طباعة رابط الصورة في وحدة التحكم
                   print(
                       "###############Profile Picture URL: $profilePictureUrl###############");
+
 
                   return SearchCard(
                     onTap: () {

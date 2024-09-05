@@ -17,7 +17,9 @@ class SearchCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 5),
         child: ListTile(
           leading: CircleAvatar(
-            backgroundImage: NetworkImage(image!),
+            backgroundImage: image != null
+                ? NetworkImage(image!)
+                : const AssetImage('assets/images/default_avatar.png') as ImageProvider,
           ),
           title: CustomText(
             text: name,
@@ -29,3 +31,5 @@ class SearchCard extends StatelessWidget {
     );
   }
 }
+
+
