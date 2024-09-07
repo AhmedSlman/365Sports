@@ -97,64 +97,64 @@ class Datum {
   List<Video>? videos;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-    id: json["id"],
-    createdAt: json["created_at"] != null
-        ? DateTime.parse(json["created_at"])
-        : null,
-    updatedAt: json["updated_at"] != null
-        ? DateTime.parse(json["updated_at"])
-        : null,
-    email: json["email"],
-    phone: json["phone"],
-    relativePhone: json["relative_phone"],
-    dob: json["d_o_b"] != null ? DateTime.parse(json["d_o_b"]) : null,
-    password: json["password"],
-    providerUserId: json["provider_user_id"],
-    provider: json["provider"],
-    pinCode: json["pin_code"],
-    pinCodeDateExpired: json["pin_code_date_expired"],
-    firstName: json["first_name"],
-    lastName: json["last_name"],
-    gender: json["gender"],
-    nationalityId: json["nationalty_id"],
-    countryId: json["country_id"],
-    typeIdentifier: json["type_identifier"],
-    expirationDate: json["expiration_date"],
-    numberIdentifier: json["number_identifier"],
-    bio: json["bio"],
-    profilePicture: json["profile_image"], // Adjust to match the JSON key
-    videos: json["videos"] != null
-        ? List<Video>.from(json["videos"].map((x) => Video.fromJson(x)))
-        : null,
-  );
+        id: json["id"],
+        createdAt: json["created_at"] != null
+            ? DateTime.parse(json["created_at"])
+            : null,
+        updatedAt: json["updated_at"] != null
+            ? DateTime.parse(json["updated_at"])
+            : null,
+        email: json["email"],
+        phone: json["phone"],
+        relativePhone: json["relative_phone"],
+        dob: json["d_o_b"] != null ? DateTime.parse(json["d_o_b"]) : null,
+        password: json["password"],
+        providerUserId: json["provider_user_id"],
+        provider: json["provider"],
+        pinCode: json["pin_code"],
+        pinCodeDateExpired: json["pin_code_date_expired"],
+        firstName: json["first_name"],
+        lastName: json["last_name"],
+        gender: json["gender"],
+        nationalityId: json["nationalty_id"],
+        countryId: json["country_id"],
+        typeIdentifier: json["type_identifier"],
+        expirationDate: json["expiration_date"],
+        numberIdentifier: json["number_identifier"],
+        bio: json["bio"],
+        profilePicture: json["profile_image"], // Adjust to match the JSON key
+        videos: json["videos"] != null
+            ? List<Video>.from(json["videos"].map((x) => Video.fromJson(x)))
+            : null,
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "created_at": createdAt?.toIso8601String(),
-    "updated_at": updatedAt?.toIso8601String(),
-    "email": email,
-    "phone": phone,
-    "relative_phone": relativePhone,
-    "d_o_b": dob?.toIso8601String(),
-    "password": password,
-    "provider_user_id": providerUserId,
-    "provider": provider,
-    "pin_code": pinCode,
-    "pin_code_date_expired": pinCodeDateExpired,
-    "first_name": firstName,
-    "last_name": lastName,
-    "gender": gender,
-    "nationalty_id": nationalityId,
-    "country_id": countryId,
-    "type_identifier": typeIdentifier,
-    "expiration_date": expirationDate,
-    "number_identifier": numberIdentifier,
-    "bio": bio,
-    "profile_image": profilePicture,
-    "videos": videos != null
-        ? List<dynamic>.from(videos!.map((x) => x.toJson()))
-        : null,
-  };
+        "id": id,
+        "created_at": createdAt?.toIso8601String(),
+        "updated_at": updatedAt?.toIso8601String(),
+        "email": email,
+        "phone": phone,
+        "relative_phone": relativePhone,
+        "d_o_b": dob?.toIso8601String(),
+        "password": password,
+        "provider_user_id": providerUserId,
+        "provider": provider,
+        "pin_code": pinCode,
+        "pin_code_date_expired": pinCodeDateExpired,
+        "first_name": firstName,
+        "last_name": lastName,
+        "gender": gender,
+        "nationalty_id": nationalityId,
+        "country_id": countryId,
+        "type_identifier": typeIdentifier,
+        "expiration_date": expirationDate,
+        "number_identifier": numberIdentifier,
+        "bio": bio,
+        "profile_image": profilePicture,
+        "videos": videos != null
+            ? List<dynamic>.from(videos!.map((x) => x.toJson()))
+            : null,
+      };
 }
 
 class Video {
