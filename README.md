@@ -1,5 +1,5 @@
 # sportat
-
+ظظظظظظ
 365 Sportat is aware of the importance of privacy and protection of personal data at the digital era and is therefore committed to the protection of the privacy of the users of the 365 SPORTAT services while browsing or using our websites and using our services.
  This privacy policy ("Privacy Policy") will describe how 365 Sportat ensures an adequate level of protection of personal data (i.e. any information relating to natural persons who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to that natural person; hereinafter "Personal Data"). 
     • More specifically, this Privacy Policy will describe:
